@@ -1,70 +1,221 @@
-# Getting Started with Create React App
+## Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Проект построен на **модульной feature-based архитектуре** с разделением на:
 
-## Available Scripts
+- **app** — инфраструктура приложения
+- **features** — бизнес-домены
+- **shared** — переиспользуемые элементы
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Структура проекта
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+src/
+ ├── app/
+ ├── features/
+ └── shared/
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+# App — инфраструктура приложения
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Папка `app` содержит **глобальную архитектуру**, маршрутизацию и системные зависимости.
 
-### `npm run build`
+```
+app/
+ ├── api/
+ ├── components/
+ ├── constants/
+ ├── hooks/
+ ├── layouts/
+ ├── providers/
+ └── routes/
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### `api/`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Глобальная конфигурация API:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- HTTP клиент
+- базовые настройки запросов
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### `components/`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Компоненты уровня приложения:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- глобальные UI элементы
+- навигация
+- sidebar
+- layout
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+### `constants/`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Глобальные константы:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- конфиги
+- ключи
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### `hooks/`
 
-### Analyzing the Bundle Size
+Глобальные реакт хуки:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- авторизация
+- системные состояния
+- утилитарные hooks
 
-### Making a Progressive Web App
+Пример:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+useAuth.js
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### `layouts/`
 
-### Deployment
+Layout-компоненты управляют структурой страницы:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- `MainLayout` — основной layout страниц
 
-### `npm run build` fails to minify
+Layouts:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- навигация
+- sidebar
+
+---
+
+### `providers/`
+
+Глобальные контексты приложения:
+
+- AuthProvider
+- ThemeProvider
+- другие системные провайдеры
+
+---
+
+### `routes/`
+
+Слой маршрутизации:
+
+```
+routes/
+ ├── ui/
+ └── AppRouter.jsx
+```
+
+#### UI routes:
+
+- `PrivateRoute` — защита маршрутов
+- `PublicRoute` — публичные страницы
+
+#### AppRouter:
+
+Единая точка конфигурации маршрутов.
+
+---
+
+# Features — бизнес-модули
+
+Каждая feature содержит:
+
+```
+feature/
+ ├── api/
+ ├── components/
+ ├── hooks/
+ ├── FeaturePage.jsx
+ └── styles
+```
+
+---
+
+## Feature: auth
+
+Отвечает за:
+
+- логин
+- регистрацию
+- авторизацию
+
+Содержит:
+
+- API вызовы
+- UI компоненты
+- кастомные hooks
+- страницу авторизации
+
+---
+
+## 📊 Feature: graph
+
+Отвечает за:
+
+- загрузка данных
+- отображение
+- взаимодействие
+
+---
+
+## Feature: profile
+
+Отвечает за:
+
+- данные пользователя
+- редактирование
+- UI профиля
+
+---
+
+# Shared — переиспользуемые ресурсы
+
+```
+shared/
+ ├── icons/
+ └── ui/
+```
+
+Здесь находятся:
+
+- базовые UI компоненты
+- иконки
+- утилиты
+
+---
+
+## Поток зависимостей
+
+```
+shared → features → app
+```
+
+Features не должны зависеть друг от друга напрямую.
+
+---
+
+## Как добавить новую feature
+
+1. Создать папку:
+
+```
+features/newFeature/
+```
+
+2. Добавить:
+
+```
+api/
+components/
+hooks/
+NewFeaturePage.jsx
+```
+
+3. Подключить маршрут в `AppRouter`.
