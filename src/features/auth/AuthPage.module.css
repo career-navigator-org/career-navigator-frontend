@@ -1,0 +1,516 @@
+:root {
+  --bg-primary: #fafafa;
+  --bg-secondary: #ffffff;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --border-color: #e0e0e0;
+  --accent-color: #333333;
+  --accent-hover: #000000;
+  --card-bg: #ffffff;
+  --input-bg: #fafafa;
+  --shadow-color: rgba(0,0,0,0.1);
+}
+
+.dark-theme {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --border-color: #404040;
+  --accent-color: #666666;
+  --accent-hover: #808080;
+  --card-bg: #2d2d2d;
+  --input-bg: #3d3d3d;
+  --shadow-color: rgba(0,0,0,0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.welcomeMinimal {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.welcomeContent {
+  text-align: center;
+  max-width: 600px;
+}
+
+.welcomeContent h1 {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.welcomeGreeting {
+  font-size: 56px;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+  display: inline-block;
+  animation: slideFromLeft 0.8s ease-out forwards;
+}
+
+.welcomeEmoji {
+  font-size: 52px;
+  line-height: 1;
+  display: inline-block;
+  animation: slideFromLeft 0.8s ease-out 0.1s forwards;
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.welcomeText {
+  font-size: 20px;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+  line-height: 1.5;
+  font-weight: 300;
+  animation: fadeIn 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+.welcomeText br + span {
+  display: block;
+  animation: fadeIn 1.2s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+.welcomeBtn {
+  padding: 16px 48px;
+  background: var(--accent-color);
+  border: none;
+  border-radius: 40px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  animation: slideFromRight 0.8s ease-out 0.5s forwards;
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.welcomeBtn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.welcomeFooter {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.welcomeHint {
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
+  animation: fadeIn 1s ease-out 0.8s forwards;
+  opacity: 0;
+}
+
+.questionsMinimal {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding: 60px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.questionsHeader {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.questionsHeader h2 {
+  font-size: 32px;
+  color: var(--text-primary);
+  font-weight: 400;
+  margin: 0 0 5px 0;
+}
+
+.questionsStep {
+  display: inline-block;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.questionBlock {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.4s ease;
+}
+
+.questionLabel {
+  display: block;
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.optionsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.textInput,
+.skillsInput {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background: var(--input-bg);
+  color: var(--text-primary);
+}
+
+.textInput:focus,
+.skillsInput:focus {
+  outline: none;
+  border-color: var(--text-secondary);
+  background: var(--bg-secondary);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.textInput::placeholder,
+.skillsInput::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.textInput[type="date"] {
+  color: var(--text-primary);
+  font-family: inherit;
+}
+
+.careerMinimal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.careerPill,
+.optionPill {
+  padding: 10px 20px;
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.careerPill:hover,
+.optionPill:hover {
+  background: var(--bg-secondary);
+  transform: translateY(-1px);
+}
+
+.careerPill.selected,
+.optionPill.selected {
+  background: var(--accent-color);
+  border-color: var(--accent-hover);
+  color: white;
+}
+
+.selectedSkills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.skillTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--input-bg);
+  border-radius: 30px;
+  font-size: 14px;
+  color: var(--text-primary);
+  animation: fadeIn 0.2s ease;
+}
+
+.removeSkill {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.removeSkill:hover {
+  color: #ff4444;
+}
+
+.suggestionsDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-top: 5px;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  z-index: 10;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.suggestionsDropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.suggestionsDropdown::-webkit-scrollbar-track {
+  background: var(--input-bg);
+  border-radius: 3px;
+}
+
+.suggestionsDropdown::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.suggestionsDropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+.suggestionItem {
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.suggestionItem:hover {
+  background: var(--input-bg);
+}
+
+.popularSkills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.popularLabel {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-right: 5px;
+}
+
+.popularSkill {
+  padding: 6px 12px;
+  background: none;
+  border: 1px dashed var(--border-color);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.popularSkill:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+  background: var(--input-bg);
+}
+
+.selectedValue,
+.selectedCity {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--input-bg);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.selectedValue strong,
+.selectedCity strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.backBtn:hover {
+  background: var(--input-bg);
+  color: var(--text-primary);
+}
+
+.questionsFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
+
+.submitQuestionsBtn {
+  padding: 15px 50px;
+  background: var(--accent-color);
+  border: none;
+  border-radius: 40px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 400;
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.submitQuestionsBtn:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.submitQuestionsBtn:disabled {
+  background: var(--border-color);
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.5;
+}
+
+@media (max-width: 600px) {
+  .welcomeGreeting {
+    font-size: 42px;
+  }
+  
+  .welcomeEmoji {
+    font-size: 38px;
+  }
+  
+  .welcomeText {
+    font-size: 18px;
+    padding: 0 20px;
+  }
+  
+  .welcomeBtn {
+    padding: 14px 40px;
+    font-size: 16px;
+  }
+  
+  .questionsHeader h2 {
+    font-size: 28px;
+  }
+  
+  .questionBlock {
+    padding: 20px;
+  }
+  
+  .careerPill,
+  .optionPill {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  
+  .submitQuestionsBtn {
+    width: 100%;
+    padding: 15px 30px;
+  }
+  
+  .skillsInput,
+  .textInput {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .suggestionItem {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  
+  .popularSkills {
+    gap: 8px;
+  }
+  
+  .popularSkill {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}

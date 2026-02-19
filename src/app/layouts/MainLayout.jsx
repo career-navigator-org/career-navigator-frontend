@@ -1,17 +1,12 @@
-import { SideBar } from "../components/SideBar";
+import React from 'react'
+import { Outlet } from 'react-router-dom'
 
-import { Outlet } from "react-router-dom";
+const MainLayout = () => {
+  return (
+    <div>
+      <Outlet />
+    </div>
+  )
+}
 
-import "./style.module.css";
-
-
-export default function MainLayout() {
-    return (
-        <>
-            <main className="mainContainer">
-                <SideBar />
-                <Outlet />
-            </main>
-        </>
-    );
-};
+export default MainLayout  

@@ -1,18 +1,10 @@
-import { Navigate, Outlet } from "react-router-dom";
+import React from 'react'
+import { Navigate } from 'react-router-dom'
 
-import { useAuth } from "../../hooks/useAuth";
+const PublicRoute = ({ children }) => {
+  const isAuthenticated = false
+  
+  return !isAuthenticated ? children : <Navigate to="/skills" />
+}
 
-/**
- * PublicRoute – страница доступна всем: гостям и авторизованным
- * Делает редирект авторизованных
-*/
-
-export const PublicRoute = () => {
-    const { isAuth, isLoading } = useAuth();
-
-    if (isLoading) {
-        return null;
-    }
-
-    return isAuth ? <Navigate to="/" replace /> : <Outlet />;
-};
+export default PublicRoute

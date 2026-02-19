@@ -1,8 +1,12 @@
+import React from 'react'
 
-export const ProfilePage = () => {
-    return (
-        <div>
+const ProfilePage = () => {
+  return (
+    <div>
+      <h1>Profile Page</h1>
+      <p>Страница профиля в разработке</p>
+    </div>
+  )
+}
 
-        </div>
-    )
-};
+export default ProfilePage  

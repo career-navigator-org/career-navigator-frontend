@@ -1,0 +1,481 @@
+.app {
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.lightTheme {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecf2 100%);
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.gradientOrb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+}
+
+.orb1 {
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(135deg, #a8c0ff 0%, #8ec5fc 100%);
+  top: -200px;
+  left: -200px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.orb2 {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(160deg, #fbc2eb 0%, #a6c1ee 100%);
+  bottom: -150px;
+  right: -150px;
+  animation: float 15s ease-in-out infinite reverse;
+}
+
+.orb3 {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(62deg, #ff9a9e 0%, #fecfef 100%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: float 25s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #718096;
+}
+
+.modulesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 10px;
+}
+
+.moduleCard {
+  flex: 0 1 450px;
+  min-width: 350px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 15px 35px -15px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.moduleCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
+}
+
+.skillsModule {
+  width: 100%;
+  position: relative;
+}
+
+.moduleHeader {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.moduleTitle {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 5px 0;
+}
+
+.moduleDescription {
+  font-size: 14px;
+  color: #718096;
+  margin: 0;
+}
+
+.moduleProgress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.moduleProgressTrack {
+  flex: 1;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.moduleProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 100px;
+  transition: width 0.5s ease;
+}
+
+.moduleProgressText {
+  font-size: 13px;
+  font-weight: 600;
+  color: #667eea;
+  min-width: 38px;
+  text-align: right;
+}
+
+.moduleSkillsField {
+  position: relative;
+  min-height: 200px;
+  margin: 10px 0 15px;
+  width: 100%;
+}
+
+.moduleSkillsWrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  transform-style: preserve-3d;
+}
+
+.moduleGridGuide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 20px;
+  opacity: 0.15;
+  pointer-events: none;
+  width: 100%;
+  justify-content: center;
+}
+
+.moduleGridCol {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.moduleGridCell {
+  width: 100px;
+  height: 65px;
+  border: 2px dashed #a0aec0;
+  border-radius: 12px;
+  background: rgba(160, 174, 192, 0.05);
+}
+
+.skillCard {
+  position: absolute;
+  background: white;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 100%;
+  box-sizing: border-box;
+  will-change: transform, left, top;
+}
+
+.skillCard:hover {
+  transform: translate(-50%, -50%) scale(1.05) !important;
+  border-color: #667eea;
+  box-shadow: 0 12px 25px -8px rgba(102, 126, 234, 0.3);
+  z-index: 100 !important;
+}
+
+.skillCard.completed {
+  background: linear-gradient(135deg, #f5f0ff, #f0f4ff);
+  border-color: #667eea;
+}
+
+.skillCard.dragging {
+  opacity: 0.6;
+  transform: translate(-50%, -50%) scale(1.1) !important;
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.2);
+  z-index: 1000 !important;
+}
+
+.cardContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  position: relative;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.skillOrder {
+  font-size: 9px;
+  font-weight: 500;
+  color: #718096;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 2px 6px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+
+.checkboxWrapper {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skillCheckbox {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  accent-color: #667eea;
+  border-radius: 3px;
+  margin: 0;
+}
+
+.skillTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: auto 0;
+  word-break: break-word;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+}
+
+.skillCard.completed .skillTitle {
+  color: #667eea;
+}
+
+.completedBadge {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  background: #667eea;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.3s ease;
+}
+
+.checkIcon {
+  width: 10px;
+  height: 10px;
+  fill: white;
+}
+
+.moduleComplete {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.moduleCompleteBadge {
+  display: inline-block;
+  padding: 5px 15px;
+  background: #48bb78;
+  color: white;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(72, 187, 120, 0.2);
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 1024px) {
+  .modulesGrid {
+    gap: 20px;
+  }
+  
+  .moduleCard {
+    flex: 0 1 400px;
+    min-width: 320px;
+  }
+  
+  .moduleGridCell {
+    width: 90px;
+    height: 60px;
+  }
+  
+  .moduleGridGuide {
+    gap: 15px;
+  }
+  
+  .moduleGridCol {
+    gap: 12px;
+  }
+  
+  .skillCard {
+    width: 90px !important;
+    height: 60px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 20px 15px;
+  }
+  
+  .title {
+    font-size: 30px;
+  }
+  
+  .subtitle {
+    font-size: 15px;
+  }
+  
+  .modulesGrid {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .moduleCard {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: 450px;
+    min-width: auto;
+  }
+  
+  .moduleGridCell {
+    width: 85px;
+    height: 55px;
+  }
+  
+  .skillCard {
+    width: 85px !important;
+    height: 55px !important;
+  }
+  
+  .skillTitle {
+    font-size: 12px;
+  }
+  
+  .skillOrder {
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+  
+  .checkboxWrapper {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .skillCheckbox {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .moduleCard {
+    padding: 15px;
+  }
+  
+  .moduleTitle {
+    font-size: 20px;
+  }
+  
+  .moduleGridCell {
+    width: 75px;
+    height: 50px;
+  }
+  
+  .moduleGridGuide {
+    gap: 10px;
+  }
+  
+  .moduleGridCol {
+    gap: 8px;
+  }
+  
+  .skillCard {
+    width: 75px !important;
+    height: 50px !important;
+  }
+  
+  .skillTitle {
+    font-size: 10px;
+  }
+  
+  .cardContent {
+    padding: 5px 6px;
+  }
+  
+  .completedBadge {
+    width: 14px;
+    height: 14px;
+    bottom: 3px;
+    right: 3px;
+  }
+  
+  .checkIcon {
+    width: 8px;
+    height: 8px;
+  }
+}
