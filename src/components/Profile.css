@@ -1,0 +1,42 @@
+.profile {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #FFFFFF, #F6F7FB);
+  border: 1px solid #4B4FD8;
+  padding: 20px;
+  border-radius: 16px;
+  min-width: 220px;
+  max-width: 300px;
+  color: #2B2D42;
+  box-shadow: 0 10px 25px rgba(43, 45, 66, 0.25);
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.profile h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, #00C26E, #4B4FD8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.profile ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.profile li {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #2B2D42;
+}
+
+.profile p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4B4FD8;
+}
