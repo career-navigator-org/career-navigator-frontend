@@ -1,14 +1,11 @@
-import React from 'react'
-import { Welcome } from './components/Welcome'
-import { PersonalInfoForm } from './components/PersonalInfoForm'
-import { CareerForm } from './components/CareerForm'
-import { useOnboarding } from './hooks/useOnboarding'
-import { ThemeToggle } from '../../app/components/ThemeToggle/ThemeToggle'
-import styles from './AuthPage.module.css'  
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Welcome } from './components/Welcome';
+import { PersonalInfoForm } from './components/PersonalInfoForm';
+import { CareerForm } from './components/CareerForm';
+import { useOnboarding } from './hooks/useOnboarding';
 
-const AuthPage = () => {
-console.log('AuthPage styles:', styles)
-
+const AuthPage = ({ onComplete }) => {
   const {
     step,
     formData,
@@ -30,42 +27,73 @@ console.log('AuthPage styles:', styles)
     nextStep,
     prevStep,
     startOnboarding
-  } = useOnboarding()
+  } = useOnboarding();
+
+  const navigate = useNavigate();
+
+  const handleComplete = (e) => {
+    e.preventDefault();
+    
+    if (!formData.career || formData.selectedSkills.length === 0) {
+      alert('Заполните все поля');
+      return;
+    }
+    
+    console.log('✅ Данные для PDF:', formData);
+
+    if (onComplete) {
+      onComplete(formData);
+    }
+
+    updateFormData('career', '');
+    updateFormData('selectedSkills', []);
+    setCareerInput('');
+
+    navigate('/skills');
+  };
 
   if (step === 'welcome') {
     return (
       <div className="app-container">
-        <ThemeToggle />
         <Welcome onStart={startOnboarding} />
       </div>
-    )
+    );
   }
 
   if (step === 'personal-info') {
     return (
       <div className="app-container">
-        <ThemeToggle />
         <PersonalInfoForm
           formData={formData}
           updateFormData={updateFormData}
           onNext={nextStep}
         />
       </div>
-    )
+    );
   }
 
   return (
     <div className="app-container">
-      <ThemeToggle />
       <CareerForm
         formData={formData}
         updateFormData={updateFormData}
-        onSubmit={handleSubmit}
+        onSubmit={handleComplete}
         loading={loading}
         onBack={prevStep}
+        skillInput={skillInput}
+        setSkillInput={setSkillInput}
+        careerInput={careerInput}
+        setCareerInput={setCareerInput}
+        getCareerSuggestions={getCareerSuggestions}
+        getSkillSuggestions={getSkillSuggestions}
+        addSkill={addSkill}
+        removeSkill={removeSkill}
+        handleSkillKeyDown={handleSkillKeyDown}
+        handleCareerSelect={handleCareerSelect}
+        handleCareerKeyDown={handleCareerKeyDown}
       />
     </div>
-  )
-}
+  );
+};
 
-export default AuthPage  
+export default AuthPage;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import styles from './GraphPage.module.css'
+import { generateResumePDF } from './utils/pdfGenerator'
 
-const SkillsModule = ({ title, description, skills: initialSkills }) => {
+const SkillsModule = ({ title, description, skills: initialSkills, onSkillChange }) => {
   const [skills, setSkills] = useState(initialSkills)
   const [draggedSkill, setDraggedSkill] = useState(null)
 
@@ -11,31 +12,33 @@ const SkillsModule = ({ title, description, skills: initialSkills }) => {
   const isProfessionReady = completedSkills === totalSkills
 
   const toggleSkill = (skillId) => {
-    setSkills(prevSkills =>
-      prevSkills.map(skill =>
+    setSkills(prevSkills => {
+      const updatedSkills = prevSkills.map(skill =>
         skill.id === skillId
           ? { ...skill, completed: !skill.completed }
           : skill
       )
-    )
+      onSkillChange?.(updatedSkills)
+      return updatedSkills
+    })
   }
 
   const getSkillPosition = (index, total) => {
     const cardWidth = 100
     const cardHeight = 65
-
+    
     const cols = 3
     const row = Math.floor(index / cols)
     const col = index % cols
-
+    
     const horizontalGap = 110
     const verticalGap = 75
     
     const totalRows = Math.ceil(total / cols)
-
+    
     const startY = -((totalRows - 1) * verticalGap) / 2
     const startX = -((cols - 1) * horizontalGap) / 2
-
+    
     const randomOffsetX = (index % 3 - 1) * 3
     const randomOffsetY = (index % 2) * 2
     
@@ -81,6 +84,7 @@ const SkillsModule = ({ title, description, skills: initialSkills }) => {
     }))
 
     setSkills(reorderedSkills)
+    onSkillChange?.(reorderedSkills)
   }
 
   return (
@@ -175,8 +179,8 @@ const SkillsModule = ({ title, description, skills: initialSkills }) => {
   )
 }
 
-const GraphPage = () => {
-  const modules = [
+const GraphPage = ({ userData }) => { 
+  const [modules, setModules] = useState([
     {
       id: 1,
       title: 'Frontend Basics',
@@ -210,7 +214,41 @@ const GraphPage = () => {
         { id: 304, title: 'GraphQL', completed: false, order: 4 }
       ]
     }
-  ]
+  ])
+
+  const handleSkillChange = (moduleId, updatedSkills) => {
+    setModules(prevModules =>
+      prevModules.map(module =>
+        module.id === moduleId
+          ? { ...module, skills: updatedSkills }
+          : module
+      )
+    )
+  }
+
+  const totalCompleted = modules.reduce(
+    (sum, module) => sum + module.skills.filter(s => s.completed).length,
+    0
+  )
+  const totalSkills = modules.reduce(
+    (sum, module) => sum + module.skills.length,
+    0
+  )
+  const overallProgress = Math.round((totalCompleted / totalSkills) * 100)
+
+  const handleCreateResume = async () => {
+    const defaultUserData = {
+      fullName: 'Пользователь',
+      birthDate: '—',
+      educationStatus: '—',
+      city: '—',
+      career: '—'
+    };
+
+    const dataForPDF = userData || defaultUserData;
+
+    generateResumePDF(dataForPDF, modules);
+  }
 
   return (
     <div className={`${styles.app} ${styles.lightTheme}`}>
@@ -224,6 +262,40 @@ const GraphPage = () => {
         <div className={styles.header}>
           <h1 className={styles.title}>Skill Modules</h1>
           <p className={styles.subtitle}>Выбери свой путь обучения</p>
+
+          {userData && (
+            <div className={styles.userInfo}>
+              <p>👤 {userData.fullName}</p>
+              <p>📍 {userData.city}</p>
+              <p>🎯 {userData.career}</p>
+            </div>
+          )}
+
+          <div className={styles.overallProgress}>
+            <div className={styles.overallProgressBar}>
+              <div 
+                className={styles.overallProgressFill}
+                style={{ width: `${overallProgress}%` }}
+              />
+            </div>
+            <span className={styles.overallProgressText}>
+              Общий прогресс: {totalCompleted}/{totalSkills} ({overallProgress}%)
+            </span>
+          </div>
+
+          <button 
+            className={styles.resumeButton}
+            onClick={handleCreateResume}
+            disabled={totalCompleted === 0}
+          >
+            <span className={styles.resumeButtonIcon}>📄</span>
+            Создать резюме
+            {totalCompleted === 0 && (
+              <span className={styles.resumeButtonHint}>
+                (сначала отметь навыки)
+              </span>
+            )}
+          </button>
         </div>
 
         <div className={styles.modulesGrid}>
@@ -233,6 +305,7 @@ const GraphPage = () => {
                 title={module.title}
                 description={module.description}
                 skills={module.skills}
+                onSkillChange={(updatedSkills) => handleSkillChange(module.id, updatedSkills)}
               />
             </div>
           ))}

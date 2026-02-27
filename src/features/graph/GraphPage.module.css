@@ -28,7 +28,7 @@
 .orb1 {
   width: 600px;
   height: 600px;
-  background: linear-gradient(135deg, #a8c0ff 0%, #8ec5fc 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
   top: -200px;
   left: -200px;
   animation: float 20s ease-in-out infinite;
@@ -37,7 +37,7 @@
 .orb2 {
   width: 500px;
   height: 500px;
-  background: linear-gradient(160deg, #fbc2eb 0%, #a6c1ee 100%);
+  background: linear-gradient(160deg, #ffffff 0%, #ffffff 100%);
   bottom: -150px;
   right: -150px;
   animation: float 15s ease-in-out infinite reverse;
@@ -46,7 +46,7 @@
 .orb3 {
   width: 400px;
   height: 400px;
-  background: linear-gradient(62deg, #ff9a9e 0%, #fecfef 100%);
+  background: linear-gradient(62deg, #ffffff 0%, #ffffff 100%);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -477,5 +477,245 @@
   .checkIcon {
     width: 8px;
     height: 8px;
+  }
+}
+
+.overallProgress {
+  max-width: 600px;
+  margin: 30px auto;
+  text-align: left;
+  background: white;
+  border-radius: 60px;
+  padding: 25px 30px;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.overallProgressBar {
+  width: 100%;
+  height: 24px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.overallProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+  background-size: 200% 100%;
+  border-radius: 30px;
+  transition: width 0.8s ease;
+  position: relative;
+  box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+  animation: shimmer 3s infinite;
+}
+
+.overallProgressText {
+  font-size: 18px;
+  color: #2d3748;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.overallProgressText span:first-child {
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.overallProgressText span:last-child {
+  background: #667eea;
+  color: white;
+  padding: 6px 18px;
+  border-radius: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+.resumeButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 60px;
+  padding: 18px 42px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 10px auto 5px;
+  box-shadow: 0 20px 30px -10px rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.resumeButton:hover:not(:disabled) {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 25px 35px -10px rgba(255, 255, 255, 0.6);
+}
+
+.resumeButton:active:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 15px 25px -10px rgba(255, 255, 255, 0.5);
+}
+
+.resumeButton:disabled {
+  background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.resumeButtonIcon {
+  font-size: 28px;
+  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.2));
+}
+
+.resumeButtonHint {
+  font-size: 14px;
+  font-weight: 400;
+  margin-left: 8px;
+  opacity: 0.9;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 10px;
+  border-radius: 30px;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(102, 126, 234, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+  }
+}
+
+.resumeButton:not(:disabled) {
+  animation: pulse 2s infinite;
+}
+
+@media (max-width: 768px) {
+  .overallProgress {
+    max-width: 90%;
+    padding: 20px 25px;
+    margin: 20px auto;
+  }
+  
+  .overallProgressBar {
+    height: 20px;
+  }
+  
+  .overallProgressText {
+    font-size: 16px;
+  }
+  
+  .overallProgressText span:last-child {
+    padding: 5px 15px;
+    font-size: 18px;
+  }
+  
+  .resumeButton {
+    padding: 15px 35px;
+    font-size: 18px;
+    width: 90%;
+    max-width: 350px;
+  }
+  
+  .resumeButtonIcon {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overallProgress {
+    padding: 15px 20px;
+  }
+  
+  .overallProgressBar {
+    height: 18px;
+  }
+  
+  .overallProgressText {
+    font-size: 14px;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .overallProgressText span:last-child {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .resumeButton {
+    padding: 12px 25px;
+    font-size: 16px;
+    flex-wrap: wrap;
+  }
+  
+  .resumeButtonIcon {
+    font-size: 22px;
+  }
+  
+  .resumeButtonHint {
+    font-size: 12px;
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+.userInfo {
+  background: white;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin: 20px auto;
+  max-width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.userInfo p {
+  margin: 0;
+  font-size: 14px;
+  color: #4a5568;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (max-width: 768px) {
+  .userInfo {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px 15px;
   }
 }
