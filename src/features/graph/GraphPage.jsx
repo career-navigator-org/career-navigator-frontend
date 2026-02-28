@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styles from './GraphPage.module.css'
 import { generateResumePDF } from './utils/pdfGenerator'
+import { ThemeToggle } from '../../app/components/ThemeToggle/ThemeToggle'
 
 const SkillsModule = ({ title, description, skills: initialSkills, onSkillChange }) => {
   const [skills, setSkills] = useState(initialSkills)
@@ -252,6 +253,8 @@ const GraphPage = ({ userData }) => {
 
   return (
     <div className={`${styles.app} ${styles.lightTheme}`}>
+       <ThemeToggle />
+       
       <div className={styles.background}>
         <div className={`${styles.gradientOrb} ${styles.orb1}`}></div>
         <div className={`${styles.gradientOrb} ${styles.orb2}`}></div>

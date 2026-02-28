@@ -1,186 +1,299 @@
 .app {
   min-height: 100vh;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  position: relative;
-  overflow-x: hidden;
-}
-
-.lightTheme {
-  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecf2 100%);
-}
-
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-.gradientOrb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.3;
-}
-
-.orb1 {
-  width: 600px;
-  height: 600px;
-  background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-  top: -200px;
-  left: -200px;
-  animation: float 20s ease-in-out infinite;
-}
-
-.orb2 {
-  width: 500px;
-  height: 500px;
-  background: linear-gradient(160deg, #ffffff 0%, #ffffff 100%);
-  bottom: -150px;
-  right: -150px;
-  animation: float 15s ease-in-out infinite reverse;
-}
-
-.orb3 {
-  width: 400px;
-  height: 400px;
-  background: linear-gradient(62deg, #ffffff 0%, #ffffff 100%);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: float 25s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -30px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-}
-
-.content {
-  position: relative;
-  z-index: 1;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 30px 20px;
+  background: var(--bg-primary);
+  transition: background-color 0.3s ease;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 30px;
+  padding: 40px 20px 20px;
 }
 
 .title {
   font-size: 36px;
-  font-weight: 700;
-  color: #2d3748;
+  font-weight: 600;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 8px;
-  letter-spacing: -1px;
 }
 
 .subtitle {
+  color: var(--text-secondary);
   font-size: 16px;
-  color: #718096;
+}
+
+.overallProgress {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  border: 1px solid var(--border-color);
+}
+
+.overallProgressBar {
+  height: 30px;
+  background: var(--bg-secondary);
+  border-radius: 30px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.overallProgressFill {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 30px;
+  transition: width 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 15px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.overallProgressText {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.overallProgressText span:last-child {
+  color: var(--primary-blue);
+}
+
+.resumeButton {
+  padding: 16px 40px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 40px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 8px 20px -5px rgba(75, 79, 216, 0.3);
+  margin: 20px auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.resumeButton:hover:not(:disabled) {
+  background: var(--gradient-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px -5px rgba(75, 79, 216, 0.4);
+}
+
+.resumeButton:disabled {
+  background: var(--border-color);
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+  box-shadow: none;
+}
+
+.resumeButtonIcon {
+  font-size: 20px;
+}
+
+.resumeButtonHint {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-left: 5px;
 }
 
 .modulesGrid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 25px;
-  padding: 10px;
+  gap: 30px;
+  padding: 20px;
 }
 
 .moduleCard {
-  flex: 0 1 450px;
-  min-width: 350px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 15px 35px -15px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  flex: 0 1 400px;
+  background: var(--card-bg);
+  border-radius: 30px;
+  padding: 25px;
+  box-shadow: 0 20px 40px -15px var(--shadow-color);
+  border: 1px solid var(--border-color);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .moduleCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
-}
-
-.skillsModule {
-  width: 100%;
-  position: relative;
+  box-shadow: 0 25px 50px -15px var(--shadow-color);
 }
 
 .moduleHeader {
-  margin-bottom: 15px;
-  text-align: left;
+  margin-bottom: 20px;
 }
 
 .moduleTitle {
   font-size: 22px;
   font-weight: 600;
-  color: #2d3748;
-  margin: 0 0 5px 0;
+  color: var(--text-primary);
+  margin-bottom: 5px;
 }
 
 .moduleDescription {
+  color: var(--text-secondary);
   font-size: 14px;
-  color: #718096;
-  margin: 0;
 }
 
 .moduleProgress {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
 .moduleProgressTrack {
   flex: 1;
   height: 6px;
-  background: rgba(0, 0, 0, 0.08);
-  border-radius: 100px;
+  background: var(--bg-secondary);
+  border-radius: 6px;
   overflow: hidden;
 }
 
 .moduleProgressFill {
   height: 100%;
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  border-radius: 100px;
+  background: var(--gradient-primary);
+  border-radius: 6px;
   transition: width 0.5s ease;
 }
 
 .moduleProgressText {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #667eea;
-  min-width: 38px;
+  color: var(--primary-blue);
+  min-width: 40px;
   text-align: right;
 }
 
 .moduleSkillsField {
-  position: relative;
   min-height: 200px;
-  margin: 10px 0 15px;
-  width: 100%;
+  margin: 20px 0;
+  position: relative;
 }
 
 .moduleSkillsWrapper {
   position: relative;
-  width: 100%;
   height: 200px;
-  transform-style: preserve-3d;
+}
+
+.skillCard {
+  position: absolute;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 5px 15px var(--shadow-color);
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.skillCard:hover {
+  transform: translate(-50%, -50%) scale(1.05) !important;
+  border-color: var(--primary-blue);
+  z-index: 100;
+}
+
+.skillCard.completed {
+  background: linear-gradient(135deg, rgba(75, 79, 216, 0.1), rgba(0, 194, 110, 0.1));
+  border-color: var(--primary-green);
+}
+
+.skillCard.dragging {
+  opacity: 0.7;
+  transform: translate(-50%, -50%) scale(1.1) !important;
+  z-index: 1000;
+}
+
+.cardContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.skillOrder {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: var(--bg-primary);
+  border-radius: 10px;
+  color: var(--text-secondary);
+}
+
+.checkboxWrapper {
+  width: 16px;
+  height: 16px;
+}
+
+.skillCheckbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--primary-green);
+}
+
+.skillTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: auto 0;
+  word-break: break-word;
+}
+
+.skillCard.completed .skillTitle {
+  color: var(--primary-green);
+}
+
+.completedBadge {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  background: var(--primary-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: popIn 0.3s ease;
+}
+
+.checkIcon {
+  width: 10px;
+  height: 10px;
+  fill: white;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+  }
+  80% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .moduleGridGuide {
@@ -205,159 +318,84 @@
 .moduleGridCell {
   width: 100px;
   height: 65px;
-  border: 2px dashed #a0aec0;
+  border: 2px dashed var(--border-color);
   border-radius: 12px;
-  background: rgba(160, 174, 192, 0.05);
-}
-
-.skillCard {
-  position: absolute;
-  background: white;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  cursor: pointer;
-  user-select: none;
-  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  max-width: 100%;
-  box-sizing: border-box;
-  will-change: transform, left, top;
-}
-
-.skillCard:hover {
-  transform: translate(-50%, -50%) scale(1.05) !important;
-  border-color: #667eea;
-  box-shadow: 0 12px 25px -8px rgba(102, 126, 234, 0.3);
-  z-index: 100 !important;
-}
-
-.skillCard.completed {
-  background: linear-gradient(135deg, #f5f0ff, #f0f4ff);
-  border-color: #667eea;
-}
-
-.skillCard.dragging {
-  opacity: 0.6;
-  transform: translate(-50%, -50%) scale(1.1) !important;
-  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.2);
-  z-index: 1000 !important;
-}
-
-.cardContent {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 8px 10px;
-  position: relative;
-}
-
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 4px;
-}
-
-.skillOrder {
-  font-size: 9px;
-  font-weight: 500;
-  color: #718096;
-  background: rgba(0, 0, 0, 0.04);
-  padding: 2px 6px;
-  border-radius: 20px;
-  letter-spacing: 0.3px;
-}
-
-.checkboxWrapper {
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.skillCheckbox {
-  width: 14px;
-  height: 14px;
-  cursor: pointer;
-  accent-color: #667eea;
-  border-radius: 3px;
-  margin: 0;
-}
-
-.skillTitle {
-  font-size: 13px;
-  font-weight: 600;
-  color: #2d3748;
-  margin: auto 0;
-  word-break: break-word;
-  line-height: 1.2;
-  letter-spacing: -0.2px;
-}
-
-.skillCard.completed .skillTitle {
-  color: #667eea;
-}
-
-.completedBadge {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  width: 16px;
-  height: 16px;
-  background: #667eea;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: popIn 0.3s ease;
-}
-
-.checkIcon {
-  width: 10px;
-  height: 10px;
-  fill: white;
+  background: transparent;
 }
 
 .moduleComplete {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .moduleCompleteBadge {
   display: inline-block;
-  padding: 5px 15px;
-  background: #48bb78;
+  padding: 6px 16px;
+  background: var(--gradient-primary);
   color: white;
   border-radius: 30px;
   font-size: 13px;
   font-weight: 500;
-  box-shadow: 0 4px 10px rgba(72, 187, 120, 0.2);
 }
 
-@keyframes popIn {
-  0% {
-    transform: scale(0);
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gradientOrb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+}
+
+.orb1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--primary-blue), transparent 70%);
+  top: -200px;
+  left: -200px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.orb2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--primary-green), transparent 70%);
+  bottom: -150px;
+  right: -150px;
+  animation: float 15s ease-in-out infinite reverse;
+}
+
+.orb3 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--primary-blue), transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: float 25s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
   }
-  80% {
-    transform: scale(1.2);
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
   }
-  100% {
-    transform: scale(1);
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
   }
 }
 
 @media (max-width: 1024px) {
-  .modulesGrid {
-    gap: 20px;
-  }
-  
-  .moduleCard {
-    flex: 0 1 400px;
-    min-width: 320px;
-  }
-  
   .moduleGridCell {
     width: 90px;
     height: 60px;
@@ -370,18 +408,9 @@
   .moduleGridCol {
     gap: 12px;
   }
-  
-  .skillCard {
-    width: 90px !important;
-    height: 60px !important;
-  }
 }
 
 @media (max-width: 768px) {
-  .content {
-    padding: 20px 15px;
-  }
-  
   .title {
     font-size: 30px;
   }
@@ -396,45 +425,25 @@
   }
   
   .moduleCard {
-    flex: 0 1 auto;
     width: 100%;
     max-width: 450px;
-    min-width: auto;
   }
   
-  .moduleGridCell {
-    width: 85px;
-    height: 55px;
+  .resumeButton {
+    padding: 14px 32px;
+    font-size: 16px;
+    width: 90%;
+    max-width: 300px;
   }
   
-  .skillCard {
-    width: 85px !important;
-    height: 55px !important;
-  }
-  
-  .skillTitle {
-    font-size: 12px;
-  }
-  
-  .skillOrder {
-    font-size: 8px;
-    padding: 1px 4px;
-  }
-  
-  .checkboxWrapper {
-    width: 14px;
-    height: 14px;
-  }
-  
-  .skillCheckbox {
-    width: 12px;
-    height: 12px;
+  .overallProgress {
+    max-width: 90%;
   }
 }
 
 @media (max-width: 480px) {
   .moduleCard {
-    padding: 15px;
+    padding: 20px;
   }
   
   .moduleTitle {
@@ -455,267 +464,23 @@
   }
   
   .skillCard {
-    width: 75px !important;
-    height: 50px !important;
+    padding: 6px;
   }
   
   .skillTitle {
-    font-size: 10px;
+    font-size: 11px;
   }
   
-  .cardContent {
-    padding: 5px 6px;
-  }
-  
-  .completedBadge {
-    width: 14px;
-    height: 14px;
-    bottom: 3px;
-    right: 3px;
-  }
-  
-  .checkIcon {
-    width: 8px;
-    height: 8px;
-  }
-}
-
-.overallProgress {
-  max-width: 600px;
-  margin: 30px auto;
-  text-align: left;
-  background: white;
-  border-radius: 60px;
-  padding: 25px 30px;
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.overallProgressBar {
-  width: 100%;
-  height: 24px;
-  background: rgba(0, 0, 0, 0.08);
-  border-radius: 30px;
-  overflow: hidden;
-  margin-bottom: 12px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.overallProgressFill {
-  height: 100%;
-  background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
-  background-size: 200% 100%;
-  border-radius: 30px;
-  transition: width 0.8s ease;
-  position: relative;
-  box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
-  animation: shimmer 3s infinite;
-}
-
-.overallProgressText {
-  font-size: 18px;
-  color: #2d3748;
-  font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.overallProgressText span:first-child {
-  color: #4a5568;
-  font-weight: 500;
-}
-
-.overallProgressText span:last-child {
-  background: #667eea;
-  color: white;
-  padding: 6px 18px;
-  border-radius: 40px;
-  font-size: 20px;
-  font-weight: 700;
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 0% 0;
-  }
-  50% {
-    background-position: 100% 0;
-  }
-  100% {
-    background-position: 0% 0;
-  }
-}
-
-.resumeButton {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  border-radius: 60px;
-  padding: 18px 42px;
-  font-size: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin: 10px auto 5px;
-  box-shadow: 0 20px 30px -10px rgba(255, 255, 255, 0.5);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.resumeButton:hover:not(:disabled) {
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 25px 35px -10px rgba(255, 255, 255, 0.6);
-}
-
-.resumeButton:active:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 15px 25px -10px rgba(255, 255, 255, 0.5);
-}
-
-.resumeButton:disabled {
-  background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
-  cursor: not-allowed;
-  opacity: 0.7;
-  box-shadow: none;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.resumeButtonIcon {
-  font-size: 28px;
-  filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.2));
-}
-
-.resumeButtonHint {
-  font-size: 14px;
-  font-weight: 400;
-  margin-left: 8px;
-  opacity: 0.9;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 4px 10px;
-  border-radius: 30px;
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.5);
-  }
-  70% {
-    box-shadow: 0 0 0 15px rgba(102, 126, 234, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
-  }
-}
-
-.resumeButton:not(:disabled) {
-  animation: pulse 2s infinite;
-}
-
-@media (max-width: 768px) {
-  .overallProgress {
-    max-width: 90%;
-    padding: 20px 25px;
-    margin: 20px auto;
-  }
-  
-  .overallProgressBar {
-    height: 20px;
-  }
-  
-  .overallProgressText {
-    font-size: 16px;
-  }
-  
-  .overallProgressText span:last-child {
-    padding: 5px 15px;
-    font-size: 18px;
+  .skillOrder {
+    font-size: 8px;
   }
   
   .resumeButton {
-    padding: 15px 35px;
+    padding: 12px 24px;
+    font-size: 15px;
+  }
+  
+  .resumeButtonIcon {
     font-size: 18px;
-    width: 90%;
-    max-width: 350px;
-  }
-  
-  .resumeButtonIcon {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .overallProgress {
-    padding: 15px 20px;
-  }
-  
-  .overallProgressBar {
-    height: 18px;
-  }
-  
-  .overallProgressText {
-    font-size: 14px;
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-  }
-  
-  .overallProgressText span:last-child {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .resumeButton {
-    padding: 12px 25px;
-    font-size: 16px;
-    flex-wrap: wrap;
-  }
-  
-  .resumeButtonIcon {
-    font-size: 22px;
-  }
-  
-  .resumeButtonHint {
-    font-size: 12px;
-    margin-left: 0;
-    width: 100%;
-  }
-}
-
-.userInfo {
-  background: white;
-  border-radius: 12px;
-  padding: 15px 20px;
-  margin: 20px auto;
-  max-width: 400px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.userInfo p {
-  margin: 0;
-  font-size: 14px;
-  color: #4a5568;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-@media (max-width: 768px) {
-  .userInfo {
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-    padding: 12px 15px;
   }
 }
