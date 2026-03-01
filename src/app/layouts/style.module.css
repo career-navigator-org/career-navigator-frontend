@@ -1,4 +1,10 @@
 .mainContainer {
     display: flex;
-    flex-direction: row;
+    height: 100vh;
+}
+
+.outletContainer {
+    flex: 1;
+    width: 100%;
+    overflow-y: auto;
 }

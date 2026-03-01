@@ -1,8 +1,13 @@
+import { Graph } from "./components/Graph";
 
-export const GraphPage = () => {
+import styles from "./GraphPage.module.css";
+
+
+export default function GraphPage() {
+
     return (
-        <div>
-
+        <div className={styles.page}>
+            <Graph />
         </div>
-    )
-};
+    );
+}

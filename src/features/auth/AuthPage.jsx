@@ -1,5 +1,5 @@
 
-export const AuthPage = () => {
+export default function AuthPage() {
     return (
         <div>
 

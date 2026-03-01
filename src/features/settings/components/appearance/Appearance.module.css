@@ -1,0 +1,110 @@
+.appearanceHeader p:first-child {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 6px;
+}
+
+.appearanceHeader p:last-child {
+    font-size: var(--font-size-sm);
+    color: var(--color-blue-gray);
+}
+
+.settingsSections {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.themeSection,
+.languageSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.languageSection {
+    border-top: 1px solid var(--color-border-light);
+}
+
+.themeContainer,
+.languageContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.planetIconContainer,
+.moonIconContainer {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moonIconContainer {
+    background-color: var(--color-blue-light);
+}
+
+.planetIconContainer {
+    background-color: var(--color-green-light);
+}
+
+.moonIcon,
+.planetIcon {
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.5px;
+}
+
+.moonIcon {
+    color: var(--color-dark);
+}
+
+.planetIcon {
+    color: var(--color-primary-green);
+}
+
+.themeText,
+.languageText {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.themeText p:first-child,
+.languageText p:first-child {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.themeText p:last-child,
+.languageText p:last-child {
+    font-size: var(--font-size-sm);
+    color: var(--color-blue-gray);
+}
+
+.selectTheme,
+.selectLanguage {
+    min-width: 160px;
+    height: 42px;
+    border-radius: 12px;
+    background: white;
+    border: 1.5px solid var(--color-border-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-blue-gray);
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+}
+
+.selectTheme:hover,
+.selectLanguage:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

@@ -11,5 +11,5 @@ export const PrivateRoute = () => {
 
     if (isLoading) return null;
 
-    return isAuth ? <Outlet /> : <Navigate to="/login" replace />;
+    return !isAuth ? <Outlet /> : <Navigate to="/login" replace />;
 };
