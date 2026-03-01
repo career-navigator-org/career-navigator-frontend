@@ -22,7 +22,11 @@ export const AppRouter = () => {
             </Route>
             {/* Routes for everyone */}
             <Route path="/graph" element={<GraphPage />} />
-            {/* <Route path="/" element={<Navigate to="/graph" replace />} /> */}
+            
+            {/* Если неделю не авторизовывались - то на АУФ 
+            Если авторизованы то на граф */}
+            
+            <Route path="/" element={<Navigate to="/auth" replace />} />
             {/* Private routes — только для авторизованных */}
             <Route element={<PrivateRoute />}>
                 <Route path="/profile" element={<ProfilePage />} />
