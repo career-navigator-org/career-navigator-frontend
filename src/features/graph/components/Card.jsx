@@ -1,24 +1,23 @@
 import React from 'react';
-import './Card.module.css';
+import styles from './Card.module.css';  // Импортируем как styles
+import professions from './professions';
 
-const Card = ({ profession, onStudy, onClose }) => {
-  if (!profession) return null;
-
+const Card = ({ profession = professions[0], onStudy, onClose }) => {
   return (
     <>
-      {/* Overlay */}
-      <div className="overlay" onClick={onClose}></div>
+      {/* Overlay - используем styles.overlay */}
+      <div className={styles.overlay} onClick={onClose}></div>
 
-      {/* Modal */}
-      <div className="card">
+      {/* Modal - используем styles.card */}
+      <div className={styles.card}>
         <h2>{profession.title}</h2>
 
-        <p className="salary">
+        <p className={styles.salary}>  {/* И здесь styles.salary */}
           Зарплата: {profession.salaryMin.toLocaleString()} —{' '}
           {profession.salaryMax.toLocaleString()} ₽
         </p>
 
-        <div className="schools">
+        <div className={styles.schools}>  {/* И здесь styles.schools */}
           <strong>Где учиться:</strong>
           <ul>
             {profession.schools.map((school, idx) => (
@@ -28,7 +27,7 @@ const Card = ({ profession, onStudy, onClose }) => {
         </div>
 
         <button
-          className="study-btn"
+          className={styles['study-btn']}  // Для дефиса используем квадратные скобки
           onClick={() => onStudy(profession)}
         >
           Изучить

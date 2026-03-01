@@ -57,7 +57,6 @@ export const Graph = ({setIsShow, isShow}) => {
                 fgRef.current.centerAt(node.x, node.y, 800);
                 fgRef.current.zoom(3, 800);
                 setIsShow(true);
-                alert(isShow);
             }}
             linkColor={(link) => {
                 if (!hoverNode) return "#ECECEC";
