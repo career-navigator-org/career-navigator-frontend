@@ -1,0 +1,69 @@
+.sideBarContainer {
+    width: 260px;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: white;
+    border-right: 1px solid var(--color-border-light);
+    padding: var(--space-lg) var(--space-md);
+}
+
+.sideBarHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border-light);
+}
+
+.userName {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.userEmail {
+    font-size: var(--font-size-sm);
+    color: var(--color-blue-gray);
+}
+
+.sideBarNav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.navLabel {
+    height: 44px;
+    display: flex;
+    align-items: center;
+
+    padding: 0 var(--space-sm);
+    border-radius: 12px;
+
+    font-size: var(--font-size-md);
+    font-weight: 500;
+    color: var(--color-dark);
+
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.navLabel:hover {
+    background-color: var(--color-blue-light);
+    color: var(--color-primary-blue);
+}
+
+.active {
+    box-shadow: 0 0 0 2px var(--color-blue-light);
+    color: var(--color-primary-blue);
+}
+
+.sideBarFooter {
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border-light);
+}

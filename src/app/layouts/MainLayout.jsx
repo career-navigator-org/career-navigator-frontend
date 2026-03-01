@@ -1,17 +1,17 @@
-import { SideBar } from "../components/SideBar";
+import { SideBar } from "../components/SideBar/SideBar";
 
 import { Outlet } from "react-router-dom";
 
-import "./style.module.css";
+import styles from "./style.module.css";
 
 
 export default function MainLayout() {
     return (
-        <>
-            <main className="mainContainer">
-                <SideBar />
+        <div className={styles.mainContainer}>
+            <SideBar />
+            <div className={styles.outletContainer}>
                 <Outlet />
-            </main>
-        </>
+            </div>
+        </div>
     );
-};
+}

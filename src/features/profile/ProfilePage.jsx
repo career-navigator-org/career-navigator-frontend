@@ -1,8 +1,16 @@
+import styles from './ProfilePage.module.css';
 
-export const ProfilePage = () => {
+import { Header } from './components/header/Header';
+import { About } from './components/about/About';
+import { Skills } from './components/skills/Skills';
+
+
+export default function ProfilePage() {
     return (
-        <div>
-
+        <div className={styles.profileContainer}>
+            <Header />
+            <About />
+            <Skills />
         </div>
-    )
-};
+    );
+}
