@@ -3,6 +3,7 @@ import styles from "./SideBar.module.css";
 
 const NAVLABEL = [
     { title: "Граф", navigateTo: "/graph" },
+    { title: "Прогресс", navigateTo: "/progress" },
     { title: "Профиль", navigateTo: "/profile" },
     { title: "Настройки", navigateTo: "/settings" },
 ];

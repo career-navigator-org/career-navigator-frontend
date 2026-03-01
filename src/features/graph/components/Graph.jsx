@@ -26,7 +26,7 @@ const ACTIVE_COLORS = {
     outer: "#F6F7FB",
 };
 
-export const Graph = () => {
+export const Graph = ({setIsShow, isShow}) => {
     const fgRef = useRef();
     const [hoverNode, setHoverNode] = useState(null);
     const data = useMemo(() => graphData, []);
@@ -38,6 +38,8 @@ export const Graph = () => {
             }, 100);
         }
     }, []);
+
+
 
     return (
         <ForceGraph2D
@@ -54,6 +56,8 @@ export const Graph = () => {
             onNodeClick={(node) => {
                 fgRef.current.centerAt(node.x, node.y, 800);
                 fgRef.current.zoom(3, 800);
+                setIsShow(true);
+                alert(isShow);
             }}
             linkColor={(link) => {
                 if (!hoverNode) return "#ECECEC";
