@@ -1,58 +1,40 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AuthPage from '../../features/auth/AuthPage';
-import GraphPage from '../../features/graph/GraphPage';
-import ProfilePage from '../../features/profile/ProfilePage';
-import MainLayout from '../layouts/MainLayout';
-import PrivateRoute from './ui/PrivateRoute';
-import PublicRoute from './ui/PublicRoute';
+import { Route, Routes, Navigate } from "react-router-dom";
 
-const AppRouter = () => {
-  const [userData, setUserData] = useState(() => {
-    const saved = localStorage.getItem('userData');
-    return saved ? JSON.parse(saved) : null;
-  });
+import { PublicRoute } from "./ui/PublicRoute";
+import { PrivateRoute } from "./ui/PrivateRoute";
 
-  const handleUserData = (data) => {
-    console.log('Данные из онбординга:', data); 
-    setUserData(data);
-    localStorage.setItem('userData', JSON.stringify(data));
-  };
 
-  return (
-    <BrowserRouter>
-      <Routes>
+import MainLayout from "../layouts/MainLayout";
+
+import GraphPage from "../../features/graph/GraphPage";
+import ProfilePage from "../../features/profile/ProfilePage";
+import AuthPage from "../../features/auth/AuthPage";
+import SettingsPage from "../../features/settings/SettingsPage";
+import ProgressPage from "../../features/progress/ProgressPage";
+
+
+export const AppRouter = () => {
+    return <Routes>
         <Route element={<MainLayout />}>
-          <Route 
-            path="/" 
-            element={
-              <PublicRoute>
-                <AuthPage onComplete={handleUserData} />
-              </PublicRoute>
-            } 
-          />
-
-          <Route 
-            path="/skills" 
-            element={
-              <PrivateRoute>
-                <GraphPage userData={userData} />
-              </PrivateRoute>
-            } 
-          />
-
-          <Route 
-            path="/profile" 
-            element={
-              <PrivateRoute>
-                <ProfilePage userData={userData} />
-              </PrivateRoute>
-            } 
-          />
+            {/* Public routes — только для НЕ авторизованных */}
+            <Route element={<PublicRoute />}>
+                <Route path="/auth" element={<AuthPage />} />
+            </Route>
+            {/* Routes for everyone */}
+            <Route path="/graph" element={<GraphPage />} />
+            
+            {/* Если неделю не авторизовывались - то на АУФ 
+            Если авторизованы то на граф */}
+            
+            <Route path="/" element={<Navigate to="/auth" replace />} />
+            {/* Private routes — только для авторизованных */}
+            <Route element={<PrivateRoute />}>
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/progress" element={<ProgressPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
+            </Route>
+            {/* 404 */}
+            <Route path="*" element={<></>} />
         </Route>
-      </Routes>
-    </BrowserRouter>
-  );
-};
-
-export default AppRouter;
+    </Routes>
+}

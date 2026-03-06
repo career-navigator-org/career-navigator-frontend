@@ -1,0 +1,104 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    min-width: 320px;
+    max-width: 400px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+}
+
+.closeButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.closeButton:hover {
+    background: #f0f0f0;
+}
+
+.card h2 {
+    margin: 0 0 16px 0;
+    color: #333;
+    font-size: 20px;
+    padding-right: 24px;
+}
+
+.salary {
+    font-size: 16px;
+    color: #4ECDC4;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.schools {
+    margin-bottom: 20px;
+}
+
+.schools strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.schools ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.schools li {
+    padding: 6px 0;
+    color: #666;
+    border-bottom: 1px solid #eee;
+}
+
+.schools li:last-child {
+    border-bottom: none;
+}
+
+.study-btn {
+    width: 100%;
+    padding: 12px;
+    background: #6C5CE7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.study-btn:hover {
+    background: #5A4FCF;
+}

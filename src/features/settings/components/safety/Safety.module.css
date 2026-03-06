@@ -1,0 +1,56 @@
+.safetyHeader p:first-child {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--color-dark);
+    margin-bottom: 6px;
+}
+
+.safetyHeader p:last-child {
+    font-size: var(--font-size-sm);
+    color: var(--color-blue-gray);
+}
+
+.safetyContent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.safetyContent input {
+    width: 40%;
+    padding: 12px;
+    border: 1.5px solid var(--color-border-light);
+    border-radius: 10px;
+    margin-top: 10px;
+    font-size: var(--font-size-sm);
+}
+
+.safeButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 16px;
+    width: fit-content;
+
+    background-color: var(--color-primary-green);
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shieldIcon {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.5px;
+}
+
+.safeButton:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px var(--color-green-light);
+}

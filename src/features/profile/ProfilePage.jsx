@@ -1,12 +1,16 @@
-import React from 'react'
+import styles from './ProfilePage.module.css';
 
-const ProfilePage = () => {
-  return (
-    <div>
-      <h1>Profile Page</h1>
-      <p>Страница профиля в разработке</p>
-    </div>
-  )
+import { Header } from './components/header/Header';
+import { About } from './components/about/About';
+import { Skills } from './components/skills/Skills';
+
+
+export default function ProfilePage() {
+    return (
+        <div className={styles.profileContainer}>
+            <Header />
+            <About />
+            <Skills />
+        </div>
+    );
 }
-
-export default ProfilePage  

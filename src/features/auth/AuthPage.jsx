@@ -4,8 +4,8 @@ import { Welcome } from './components/Welcome';
 import { PersonalInfoForm } from './components/PersonalInfoForm';
 import { CareerForm } from './components/CareerForm';
 import { useOnboarding } from './hooks/useOnboarding';
-import { ThemeToggle } from '../../app/components/ThemeToggle/ThemeToggle'; 
-import styles from './AuthPage.module.css'; 
+// import { ThemeToggle } from '../../app/components/ThemeToggle/ThemeToggle'; 
+// import styles from './AuthPage.module.css'; 
 
 const AuthPage = ({ onComplete }) => {
   const {
@@ -57,7 +57,7 @@ const AuthPage = ({ onComplete }) => {
   if (step === 'welcome') {
     return (
       <div className="app-container">
-        <ThemeToggle />
+        {/* <ThemeToggle /> */}
         <Welcome onStart={startOnboarding} />
       </div>
     );
@@ -66,7 +66,7 @@ const AuthPage = ({ onComplete }) => {
   if (step === 'personal-info') {
     return (
       <div className="app-container">
-        <ThemeToggle />
+        {/* <ThemeToggle /> */}
         <PersonalInfoForm
           formData={formData}
           updateFormData={updateFormData}
@@ -78,7 +78,7 @@ const AuthPage = ({ onComplete }) => {
 
   return (
     <div className="app-container">
-      <ThemeToggle />
+      {/* <ThemeToggle /> */}
       <CareerForm
         formData={formData}
         updateFormData={updateFormData}
