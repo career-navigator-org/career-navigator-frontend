@@ -1,0 +1,81 @@
+.dangerHeader {
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+}
+
+.dangerHeader p:first-child {
+    color: var(--color-danger-red);
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0;
+}
+
+.dangerHeader p:last-child {
+    color: var(--color-blue-gray);
+    font-size: 14px;
+    margin: 4px 0 0 0;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dangerContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logoutIconContainer {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-danger-red-light);
+    border-radius: 16px;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    stroke-width: 1.5px;
+    color: var(--color-danger-red);
+}
+
+.logoutText {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.logoutText p:first-child {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-dark);
+}
+
+.logoutText p:last-child {
+    font-size: var(--font-size-sm);
+    color: var(--color-blue-gray);
+}
+
+.logoutButton {
+    color: var(--color-danger-red);
+    padding: 10px 30px;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--color-border-light);
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.logoutButton:hover {
+    color: white;
+    background-color: var(--color-danger-red);
+}
