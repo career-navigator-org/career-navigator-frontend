@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../ProgressPage.module.css'
+import styles from '../GraphPage.module.css'
 
 export const HintsPanel = () => {
   return (

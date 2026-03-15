@@ -2,6 +2,12 @@ import { useMemo, useState, useRef, useEffect } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import { graphData } from "../const/graphData";
 
+// Цвета по заданию
+const LEVEL_COLORS = {
+    0: { node: '#FF3B3B', border: '#D32F2F' },  
+    1: { node: '#4CAF50', border: '#388E3C' },     
+    2: { node: '#9E9E9E', border: '#757575' },    
+    3: { node: '#2196F3', border: '#1976D2' }      
 const lerpColor = (a, b, t) => {
     const c1 = parseInt(a.slice(1), 16);
     const c2 = parseInt(b.slice(1), 16);
@@ -39,8 +45,6 @@ export const Graph = ({setIsShow, isShow}) => {
         }
     }, []);
 
-
-
     return (
         <ForceGraph2D
             ref={fgRef}
@@ -56,18 +60,18 @@ export const Graph = ({setIsShow, isShow}) => {
             onNodeClick={(node) => {
                 fgRef.current.centerAt(node.x, node.y, 800);
                 fgRef.current.zoom(3, 800);
-                setIsShow(true);
+                setIsShow(true, node);
             }}
             linkColor={(link) => {
-                if (!hoverNode) return "#ECECEC";
+                if (!hoverNode) return "#E0E0E0";
 
                 const isConnected =
                     link.source === hoverNode ||
                     link.target === hoverNode;
 
                 return isConnected
-                    ? "#8D90A1"
-                    : "#ECECEC";
+                    ? "#9E9E9E"
+                    : "#E0E0E0";
             }}
             linkWidth={(link) => {
                 if (!hoverNode) return 1;
@@ -79,77 +83,69 @@ export const Graph = ({setIsShow, isShow}) => {
                 return isConnected ? 2 : 1;
             }}
             nodeCanvasObject={(node, ctx, globalScale) => {
-                const size =
-                    node.level === 0 ? 8 :
-                        node.level === 1 ? 6 :
-                            node.level === 2 ? 6 :
-                                7;
-
-                if (!node.__hoverProgress) node.__hoverProgress = 0;
-                if (!node.__dimProgress) node.__dimProgress = 0;
-
+                // Размер узла
+                const size = node.level === 0 ? 12 : 8;
+                
+                // Получаем цвета по уровню
+                const levelColor = LEVEL_COLORS[node.level] || LEVEL_COLORS[2];
+                
+                // Если узел наведен - делаем ярче
                 const isActive = node === hoverNode;
-                const hoverTarget = isActive ? 1 : 0;
-                const dimTarget = hoverNode && !isActive ? 1 : 0;
+                
+                // Основной цвет узла
+                const nodeColor = isActive 
+                    ? levelColor.border
+                    : levelColor.node;
 
-                node.__hoverProgress +=
-                    (hoverTarget - node.__hoverProgress) * 0.12;
+                if (isActive) {
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, size + 3, 0, 2 * Math.PI);
+                    ctx.fillStyle = levelColor.border + '33'; 
+                    ctx.fill();
+                }
 
-                node.__dimProgress +=
-                    (dimTarget - node.__dimProgress) * 0.12;
-
-                const t = node.__hoverProgress;
-                const dimT = node.__dimProgress;
-
-                const innerColor = lerpColor(
-                    BASE_COLORS.node,
-                    ACTIVE_COLORS.inner,
-                    t
-                );
-
-                const outerColor = lerpColor(
-                    BASE_COLORS.border,
-                    ACTIVE_COLORS.outer,
-                    t
-                );
-
-                ctx.globalAlpha = 1 - dimT * 0.7;
-
-                // Внешний круг
+                // Основной круг
                 ctx.beginPath();
-                ctx.arc(node.x, node.y, size + 2 * t, 0, 2 * Math.PI);
-                ctx.fillStyle = outerColor;
+                ctx.arc(node.x, node.y, size, 0, 2 * Math.PI);
+                ctx.fillStyle = nodeColor;
                 ctx.fill();
 
-                // Внутренний круг
+                // Белая обводка для всех узлов
                 ctx.beginPath();
-                ctx.arc(node.x, node.y, size - 1.5 + t * 2, 0, 2 * Math.PI);
-                ctx.fillStyle = innerColor;
-                ctx.fill();
+                ctx.arc(node.x, node.y, size, 0, 2 * Math.PI);
+                ctx.strokeStyle = '#FFFFFF';
+                ctx.lineWidth = 2;
+                ctx.stroke();
 
-                // Glow
-                ctx.shadowColor = ACTIVE_COLORS.inner;
-                ctx.shadowBlur = 10 * t;
-
-                ctx.globalAlpha = 1;
-                ctx.shadowBlur = 0;
+                // Glow при наведении
+                if (isActive) {
+                    ctx.shadowColor = levelColor.border;
+                    ctx.shadowBlur = 20;
+                    
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, size, 0, 2 * Math.PI);
+                    ctx.fillStyle = nodeColor;
+                    ctx.fill();
+                    
+                    ctx.shadowBlur = 0;
+                }
 
                 // Подпись
                 const fontSize = 12 / globalScale;
                 ctx.font = `500 ${fontSize}px Inter, sans-serif`;
-                ctx.fillStyle = lerpColor("#8D90A1", "#2B2D42", t);
+                ctx.fillStyle = isActive ? '#000000' : '#666666';
                 ctx.textAlign = "center";
                 ctx.textBaseline = "top";
                 ctx.fillText(
                     node.id,
                     node.x,
-                    node.y + size + 6
+                    node.y + size + 8
                 );
             }}
             nodePointerAreaPaint={(node, color, ctx) => {
                 ctx.fillStyle = color;
                 ctx.beginPath();
-                ctx.arc(node.x, node.y, 14, 0, 2 * Math.PI);
+                ctx.arc(node.x, node.y, 15, 0, 2 * Math.PI);
                 ctx.fill();
             }}
         />

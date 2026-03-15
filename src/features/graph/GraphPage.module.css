@@ -5,5 +5,5 @@
     justify-content: center;
     display: flex;
     overflow: hidden;
-    background-color: var(--color-blue-light);
+    background-color: #ffffff; 
 }
