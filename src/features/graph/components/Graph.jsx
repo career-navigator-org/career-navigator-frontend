@@ -8,6 +8,28 @@ const LEVEL_COLORS = {
     1: { node: '#4CAF50', border: '#388E3C' },     
     2: { node: '#9E9E9E', border: '#757575' },    
     3: { node: '#2196F3', border: '#1976D2' }      
+const lerpColor = (a, b, t) => {
+    const c1 = parseInt(a.slice(1), 16);
+    const c2 = parseInt(b.slice(1), 16);
+
+    const r = Math.round(((c2 >> 16) - (c1 >> 16)) * t + (c1 >> 16));
+    const g = Math.round(
+        (((c2 >> 8) & 0xff) - ((c1 >> 8) & 0xff)) * t +
+        ((c1 >> 8) & 0xff)
+    );
+    const bCol = Math.round(((c2 & 0xff) - (c1 & 0xff)) * t + (c1 & 0xff));
+
+    return `rgb(${r},${g},${bCol})`;
+};
+
+const BASE_COLORS = {
+    node: "#F2F4F8",
+    border: "#E6E9F2",
+};
+
+const ACTIVE_COLORS = {
+    inner: "#8186f1",
+    outer: "#F6F7FB",
 };
 
 export const Graph = ({setIsShow, isShow}) => {
