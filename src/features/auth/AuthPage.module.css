@@ -759,3 +759,42 @@
 .dark-theme .backBtn:hover {
   background: #1A1C2C;
 }
+
+/* Поля пароля с кнопкой */
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordWrapper .textInput {
+  width: 100%;
+  padding-right: 90px;
+  box-sizing: border-box;
+}
+
+/* Кнопка показать/скрыть */
+.showPasswordBtn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #4B4FD8;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.showPasswordBtn:hover {
+  background: rgba(75, 79, 216, 0.1);
+}
+
+/* Сообщения об ошибках пароля */
+.passwordErrors {
+  margin-top: 5px;
+  color: #d32f2f;
+  font-size: 0.875rem;
+  line-height: 1.2;
+}

@@ -7,7 +7,8 @@ export const CareerForm = ({
   updateFormData, 
   onSubmit, 
   loading,
-  onBack 
+  onBack,
+  nextStep
 }) => {
   const [skillInput, setSkillInput] = useState('')
   const [careerInput, setCareerInput] = useState('')
@@ -81,7 +82,7 @@ export const CareerForm = ({
   return (
     <div className={styles.questionsMinimal}>
       <div className={styles.questionsHeader}>
-        <span className={styles.questionsStep}>Шаг 2 из 2</span>
+        <span className={styles.questionsStep}>Шаг 2 из 3</span>
         <h2>Карьера и навыки</h2>
         <button onClick={onBack} className={styles.backBtn}>← Назад</button>
       </div>
@@ -192,11 +193,11 @@ export const CareerForm = ({
 
       <div className={styles.questionsFooter}>
         <button
-          onClick={onSubmit}
+          onClick={nextStep}
           disabled={!formData.career || formData.selectedSkills.length === 0 || loading}
           className={styles.submitQuestionsBtn}
         >
-          {loading ? 'Отправка...' : 'Завершить'}
+          Далее
         </button>
       </div>
     </div>

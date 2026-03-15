@@ -1,18 +1,19 @@
 import { SideBar } from "../components/SideBar/SideBar";
-import Card from "../../features/graph/components/Card"
-
-import { Outlet } from "react-router-dom";
-
+import { Outlet, useLocation } from "react-router-dom";
 import styles from "./style.module.css";
 
-
 export default function MainLayout() {
-    return (
-        <div className={styles.mainContainer}>
-            <SideBar />
-            <div className={styles.outletContainer}>
-                <Outlet />
-            </div>
-        </div>
-    );
+  const location = useLocation();
+
+  // Скрываем Sidebar на всех страницах /auth (опросник)
+  const hideSidebar = location.pathname.startsWith("/auth");
+
+  return (
+    <div className={styles.mainContainer}>
+      {!hideSidebar && <SideBar />}
+      <div className={styles.outletContainer}>
+        <Outlet />
+      </div>
+    </div>
+  );
 }
