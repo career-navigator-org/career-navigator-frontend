@@ -25,7 +25,7 @@ export const PersonalInfoForm = ({ formData, updateFormData, onNext }) => {
   return (
     <div className={styles.questionsMinimal}>
       <div className={styles.questionsHeader}>
-        <span className={styles.questionsStep}>Шаг 1 из 2</span>
+        <span className={styles.questionsStep}>Шаг 1 из 3</span>
         <h2>Основная информация</h2>
       </div>
 

@@ -7,8 +7,9 @@ const LEVEL_COLORS = {
     0: { node: '#FF3B3B', border: '#D32F2F' },  
     1: { node: '#4CAF50', border: '#388E3C' },     
     2: { node: '#9E9E9E', border: '#757575' },    
-    3: { node: '#2196F3', border: '#1976D2' }      
-const lerpColor = (a, b, t) => {
+    3: { node: '#2196F3', border: '#1976D2' }
+};
+    const lerpColor = (a, b, t) => {
     const c1 = parseInt(a.slice(1), 16);
     const c2 = parseInt(b.slice(1), 16);
 

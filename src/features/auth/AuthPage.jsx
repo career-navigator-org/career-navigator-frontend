@@ -4,6 +4,7 @@ import { Welcome } from './components/Welcome';
 import { PersonalInfoForm } from './components/PersonalInfoForm';
 import { CareerForm } from './components/CareerForm';
 import { useOnboarding } from './hooks/useOnboarding';
+import { AccountForm } from "./components/AccountForm";
 // import { ThemeToggle } from '../../app/components/ThemeToggle/ThemeToggle'; 
 // import styles from './AuthPage.module.css'; 
 
@@ -57,8 +58,12 @@ const AuthPage = ({ onComplete }) => {
   if (step === 'welcome') {
     return (
       <div className="app-container">
-        {/* <ThemeToggle /> */}
-        <Welcome onStart={startOnboarding} />
+        <Welcome 
+          onStart={() => {
+            startOnboarding();
+            navigate("/auth?onboarding=true");
+          }} 
+        />
       </div>
     );
   }
@@ -75,6 +80,20 @@ const AuthPage = ({ onComplete }) => {
       </div>
     );
   }
+
+  if (step === "account") {
+  return (
+    <div className="app-container">
+      <AccountForm
+        formData={formData}
+        updateFormData={updateFormData}
+        onSubmit={handleComplete}
+        loading={loading}
+        onBack={prevStep}
+      />
+    </div>
+  );
+}
 
   return (
     <div className="app-container">
@@ -96,6 +115,7 @@ const AuthPage = ({ onComplete }) => {
         handleSkillKeyDown={handleSkillKeyDown}
         handleCareerSelect={handleCareerSelect}
         handleCareerKeyDown={handleCareerKeyDown}
+        nextStep={nextStep}
       />
     </div>
   );

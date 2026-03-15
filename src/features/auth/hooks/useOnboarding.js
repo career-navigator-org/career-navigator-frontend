@@ -6,20 +6,27 @@ import {
 } from '../../../shared/ui/constants';
 
 export const useOnboarding = () => {
+  // Шаги: welcome → personal-info → career → account
   const [step, setStep] = useState('welcome');
+
+  // Данные формы с новыми полями email и password
   const [formData, setFormData] = useState({
     fullName: '',
     birthDate: '',
     educationStatus: '',
     city: '',
     career: '',
-    selectedSkills: []
+    selectedSkills: [],
+    email: '',
+    password: ''
   });
+
   const [skillInput, setSkillInput] = useState('');
   const [cityInput, setCityInput] = useState('');
   const [careerInput, setCareerInput] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Подсказки для карьер, городов и навыков
   const getCareerSuggestions = () => {
     if (!careerInput.trim()) return [];
     const searchTerm = careerInput.toLowerCase();
@@ -47,6 +54,7 @@ export const useOnboarding = () => {
       .slice(0, 5);
   };
 
+  // Управление навыками
   const addSkill = (skill) => {
     if (!formData.selectedSkills.includes(skill)) {
       setFormData({
@@ -76,6 +84,7 @@ export const useOnboarding = () => {
     }
   };
 
+  // Карьера
   const handleCareerSelect = (career) => {
     setFormData({ ...formData, career });
     setCareerInput('');
@@ -91,23 +100,37 @@ export const useOnboarding = () => {
     }
   };
 
+  // Город
   const handleCitySelect = (city) => {
     setFormData({ ...formData, city });
     setCityInput('');
   };
 
+  // Обновление данных формы
   const updateFormData = (field, value) => {
     setFormData({ ...formData, [field]: value });
   };
 
+  // Отправка формы
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('📝 Данные формы:', formData);
     return 'success';
   };
 
-  const nextStep = () => setStep('main-questions');
-  const prevStep = () => setStep('personal-info');
+  // Навигация по шагам с новым шагом account
+  const nextStep = () => {
+    if (step === 'welcome') setStep('personal-info');
+    else if (step === 'personal-info') setStep('career');
+    else if (step === 'career') setStep('account');
+  };
+
+  const prevStep = () => {
+    if (step === 'account') setStep('career');
+    else if (step === 'career') setStep('personal-info');
+    else if (step === 'personal-info') setStep('welcome');
+  };
+
   const startOnboarding = () => setStep('personal-info');
 
   return {
