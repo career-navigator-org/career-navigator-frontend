@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-
-export default function AuthPage() {
-    return (
-        <div>
-
-        </div>
-    )
-};
-=======
 import { Welcome } from './components/welcome/Welcome';
 import { PersonalInfoForm } from './components/personalInfoForm/PersonalInfoForm';
 import { CareerForm } from './components/careerForm/CareerForm';
@@ -130,4 +120,3 @@ const AuthPage = ({ onComplete }) => {
 };
 
 export default AuthPage;
->>>>>>> 7151d94 (чё-то сделал)

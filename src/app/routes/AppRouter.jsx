@@ -10,6 +10,7 @@ import GraphPage from "../../features/graph/GraphPage";
 import ProfilePage from "../../features/profile/ProfilePage";
 import AuthPage from "../../features/auth/AuthPage";
 import SettingsPage from "../../features/settings/SettingsPage";
+import ProgressPage from "../../features/progress/ProgressPage";
 
 
 export const AppRouter = () => {
@@ -21,10 +22,15 @@ export const AppRouter = () => {
             </Route>
             {/* Routes for everyone */}
             <Route path="/graph" element={<GraphPage />} />
-            <Route path="/" element={<Navigate to="/graph" replace />} />
+            
+            {/* Если неделю не авторизовывались - то на АУФ 
+            Если авторизованы то на граф */}
+            
+            <Route path="/" element={<Navigate to="/auth" replace />} />
             {/* Private routes — только для авторизованных */}
             <Route element={<PrivateRoute />}>
                 <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/progress" element={<ProgressPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
             </Route>
             {/* 404 */}
