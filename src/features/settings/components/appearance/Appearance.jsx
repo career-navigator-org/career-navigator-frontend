@@ -1,6 +1,7 @@
 import styles from "./Appearance.module.css";
 
 import { useState } from "react";
+import { useTheme } from "../../../../app/providers/ThemeProvider";
 
 import { MoonIconComponent } from '../../../../shared/iconsComponents/MoonIcon';
 import { PlanetIconComponent } from '../../../../shared/iconsComponents/PlanetIcon';
@@ -10,26 +11,22 @@ import { DropdownMenu } from "../../../../shared/ui/DropdownMenu/DropdownMenu";
 
 
 const THEME_OPTIONS = [
-    { title: 'Светлая' },
-    { title: 'Темная' },
-    { title: 'Системная' },
+    { value: "light", label: "Светлая" },
+    { value: "dark", label: "Тёмная" },
+    { value: "system", label: "Системная" }
 ];
 
 const LANGUAGE_OPTIONS = [
-    { title: 'Русский' },
-    { title: 'Казахский' },
-    { title: 'Белорусский' },
-    { title: 'Армянский' },
-    { title: 'Азербайджанский' },
-    { title: 'Грузинский' },
-    { title: 'Таджикский' },
-    { title: 'Узбекский' },
+    { value: "ru", label: "Русский" },
+    { value: "kz", label: "Казахский" }
 ]
 
 
 export const Appearance = () => {
-    const [selectedTheme, setSelectedTheme] = useState(THEME_OPTIONS[0].title);
-    const [selectedLanguage, setSelectedLanguage] = useState(LANGUAGE_OPTIONS[0].title);
+    const [selectedLanguage, setSelectedLanguage] = useState(LANGUAGE_OPTIONS[0]);
+    const { theme, setTheme } = useTheme();
+
+    const selectedTheme = THEME_OPTIONS.find(t => t.value === theme);
 
     return (
         <BoxContainer>
@@ -51,7 +48,7 @@ export const Appearance = () => {
                     <DropdownMenu
                         dropdownItems={THEME_OPTIONS}
                         selectedItem={selectedTheme}
-                        setSelectedItem={setSelectedTheme}
+                        setSelectedItem={(item) => setTheme(item.value)}
                     />
                 </div>
                 <div className={styles.languageSection}>

@@ -5,4 +5,5 @@
     width: 100%;
     gap: 30px;
     padding: 40px 80px;
+    background-color: var(--bg);
 }

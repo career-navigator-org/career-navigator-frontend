@@ -1,0 +1,105 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    min-width: 320px;
+    max-width: 400px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+}
+
+.closeButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: var(--font-size-2xl);
+    cursor: pointer;
+    color: var(--color-blue-gray);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+
+.card h2 {
+    margin: 0 0 10px 0;
+    color: var(--color-dark);
+    font-size: 20px;
+    padding-right: 24px;
+}
+
+.salary {
+    font-size: var(--font-size-lg);
+    color: var(--color-primary-green);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.schools {
+    margin-bottom: 20px;
+}
+
+.schools strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-dark);
+}
+
+.schools ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.schools li {
+    padding: 6px 0;
+    color: var(--color-blue-gray);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.schools li:last-child {
+    border-bottom: none;
+}
+
+.study-btn {
+    width: 100%;
+    padding: 12px;
+
+    border: 2px solid var(--color-primary-blue);
+    border-radius: 16px;
+    background-color: white;
+
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-primary-blue);
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.study-btn:hover {
+    color: white;
+    background: var(--color-primary-blue);
+}

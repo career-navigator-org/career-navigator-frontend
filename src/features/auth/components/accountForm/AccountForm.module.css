@@ -1,0 +1,179 @@
+.questionsMinimal {
+    min-height: 100vh;
+    padding: 60px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.questionsHeader {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.questionsHeader h2 {
+    font-size: 32px;
+    color: var(--color-dark);
+    font-weight: 600;
+    margin: 15px 0 5px;
+    letter-spacing: -0.5px;
+}
+
+.questionsStep {
+    display: inline-block;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, var(--color-primary-blue), var(--color-primary-green));
+    color: white;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px -2px rgba(75, 79, 216, 0.3);
+}
+
+.questionBlock {
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 15px 35px -10px var(--shadow-color, rgba(0, 0, 0, 0.05));
+    border: 1px solid var(--color-border-light);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease;
+}
+
+.questionBlock:hover {
+    box-shadow: 0 20px 40px -10px var(--shadow-color, rgba(0, 0, 0, 0.1));
+}
+
+.questionLabel {
+    display: block;
+    font-size: var(--font-size-lg);
+    color: var(--color-dark);
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.textInput {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid var(--color-border-light);
+    border-radius: 16px;
+    font-size: var(--font-size-md);
+    transition: all 0.3s ease;
+    background: #FFFFFF;
+    color: var(--color-dark);
+}
+
+.textInput:focus {
+    outline: none;
+    border-color: var(--color-primary-blue);
+    box-shadow: 0 0 0 4px rgba(75, 79, 216, 0.1);
+}
+
+.textInput::placeholder {
+    color: var(--color-blue-gray);
+    opacity: 0.6;
+}
+
+.passwordWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.passwordWrapper .textInput {
+    width: 100%;
+    padding-right: 90px;
+    box-sizing: border-box;
+}
+
+.showPasswordBtn {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--color-primary-blue);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.showPasswordBtn:hover {
+    background: rgba(75, 79, 216, 0.1);
+}
+
+.passwordErrors {
+    margin-top: 5px;
+    color: var(--color-danger-red);
+    font-size: 0.875rem;
+    line-height: 1.2;
+}
+
+.questionsFooter {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.submitQuestionsBtn {
+    padding: 16px 50px;
+    background: white;
+
+    border: 2px solid var(--color-border-light);
+    border-radius: 30px;
+
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--color-dark);
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.submitQuestionsBtn:hover {
+    transform: translateY(-5px);
+    border: 2px solid var(--color-primary-blue);
+    color: var(--color-primary-blue);
+    box-shadow: 0 5px 10px -10px var(--shadow-color, rgba(0, 0, 0, 0.15));
+}
+
+.backBtn {
+    background: none;
+    border: none;
+    color: var(--color-blue-gray);
+    font-size: var(--font-size-md);
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px 25px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.backBtn:hover {
+    background: var(--color-blue-gray);
+    color: white;
+}
+
+.backBtn::before {
+    font-size: var(--font-size-lg);
+    transition: transform 0.3s ease;
+}
+
+.backBtn:hover::before {
+    transform: translateX(-3px);
+}
