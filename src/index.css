@@ -19,7 +19,10 @@ h2 {
   --color-green-light: #d8fdec;
   --color-primary-blue: #6165dc;
   --color-blue-light: #F6F7FB;
-  --color-dark: #2B2D42;
+
+  --color-dark: #222333;
+  --bg: #ffffff;
+
   --color-danger-red: #e22b37;
   --color-danger-red-light: #fff1f0;
 

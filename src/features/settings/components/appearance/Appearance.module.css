@@ -25,7 +25,7 @@
 }
 
 .languageSection {
-    border-top: 1px solid var(--color-border-light);
+    border-top: 1.5px solid var(--color-border-light);
 }
 
 .themeContainer,
@@ -81,6 +81,7 @@
     font-weight: 600;
     color: var(--color-dark);
 }
+
 
 .themeText p:last-child,
 .languageText p:last-child {

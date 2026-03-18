@@ -1,0 +1,53 @@
+.skillCard {
+    border: 2px solid var(--color-border-light);
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.skillCard:hover {
+    scale: 1.05;
+}
+
+.skillCard.dragging {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.1) !important;
+    z-index: 1000;
+}
+
+.skillTitle {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-blue-gray);
+    margin: auto 0;
+    word-break: break-word;
+}
+
+.skillCard.completed .skillTitle {
+    color: var(--color-primary-green);
+}
+
+.skillCard.completed {
+    border: 2px solid var(--color-primary-green);
+    box-shadow: 0 2px 0 1px var(--color-primary-green);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+    }
+
+    80% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

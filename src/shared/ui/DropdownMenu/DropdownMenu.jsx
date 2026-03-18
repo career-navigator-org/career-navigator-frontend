@@ -34,19 +34,22 @@ export const DropdownMenu = ({ dropdownItems, selectedItem, setSelectedItem }) =
                 className={styles.button}
                 onClick={handleDropdownClick}
             >
-                {selectedItem}
+                {selectedItem?.label}
                 <CaretIconComponent className={`${styles.chevron} ${isOpen ? styles.open : ""}`} />
             </button>
             {dropdownState.open && (
                 <div className={`${styles.dropdownContainer} ${styles.dropdownOpen}`}>
                     {dropdownItems?.map((item, index) => (
                         <div
-                            onClick={() => {
-                                setSelectedItem(dropdownItems[index].title)
-                                setDropdownState({ open: false });
-                            }}
                             key={index}
-                        >{item.title}</div>
+                            onClick={() => {
+                                setSelectedItem(item);
+                                setDropdownState({ open: false });
+                                setIsOpen(false);
+                            }}
+                        >
+                            {item.label}
+                        </div>
                     ))}
                 </div>
             )}

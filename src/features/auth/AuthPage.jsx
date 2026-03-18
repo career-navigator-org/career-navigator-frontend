@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { Welcome } from './components/welcome/Welcome';
+import { PersonalInfoForm } from './components/personalInfoForm/PersonalInfoForm';
+import { CareerForm } from './components/careerForm/CareerForm';
+import { AccountForm } from "./components/accountForm/AccountForm";
+
 import { useNavigate } from 'react-router-dom';
-import { Welcome } from './components/Welcome';
-import { PersonalInfoForm } from './components/PersonalInfoForm';
-import { CareerForm } from './components/CareerForm';
 import { useOnboarding } from './hooks/useOnboarding';
-import { AccountForm } from "./components/AccountForm";
 // import { ThemeToggle } from '../../app/components/ThemeToggle/ThemeToggle'; 
 // import styles from './AuthPage.module.css'; 
 
@@ -36,13 +36,11 @@ const AuthPage = ({ onComplete }) => {
 
   const handleComplete = (e) => {
     e.preventDefault();
-    
+
     if (!formData.career || formData.selectedSkills.length === 0) {
       alert('Заполните все поля');
       return;
     }
-    
-    console.log('✅ Данные для PDF:', formData);
 
     if (onComplete) {
       onComplete(formData);
@@ -58,11 +56,11 @@ const AuthPage = ({ onComplete }) => {
   if (step === 'welcome') {
     return (
       <div className="app-container">
-        <Welcome 
+        <Welcome
           onStart={() => {
             startOnboarding();
             navigate("/auth?onboarding=true");
-          }} 
+          }}
         />
       </div>
     );
@@ -82,18 +80,18 @@ const AuthPage = ({ onComplete }) => {
   }
 
   if (step === "account") {
-  return (
-    <div className="app-container">
-      <AccountForm
-        formData={formData}
-        updateFormData={updateFormData}
-        onSubmit={handleComplete}
-        loading={loading}
-        onBack={prevStep}
-      />
-    </div>
-  );
-}
+    return (
+      <div className="app-container">
+        <AccountForm
+          formData={formData}
+          updateFormData={updateFormData}
+          onSubmit={handleComplete}
+          loading={loading}
+          onBack={prevStep}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="app-container">

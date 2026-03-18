@@ -1,0 +1,307 @@
+.questionsMinimal {
+    min-height: 100vh;
+    padding: 60px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.questionsHeader {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.questionsHeader h2 {
+    font-size: 32px;
+    color: var(--color-dark);
+    font-weight: 600;
+    margin: 15px 0 5px;
+    letter-spacing: -0.5px;
+}
+
+.questionsStep {
+    display: inline-block;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, var(--color-primary-blue), var(--color-primary-green));
+    color: white;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px -2px rgba(75, 79, 216, 0.3);
+}
+
+.questionBlock {
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--color-border-light);
+    transition: all 0.3s ease;
+    animation: fadeIn 0.5s ease;
+}
+
+.questionBlock:hover {
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+}
+
+.questionLabel {
+    display: block;
+    font-size: var(--font-size-lg);
+    color: var(--color-dark);
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.questionsFooter {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.submitQuestionsBtn {
+    padding: 16px 50px;
+    background: white;
+
+    border: 2px solid var(--color-border-light);
+    border-radius: 30px;
+
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--color-dark);
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.submitQuestionsBtn:hover {
+    transform: translateY(-5px);
+    border: 2px solid var(--color-primary-blue);
+    color: var(--color-primary-blue);
+    box-shadow: 0 5px 10px -10px var(--shadow-color, rgba(0, 0, 0, 0.15));
+}
+
+.backBtn {
+    background: none;
+    border: none;
+    color: var(--color-blue-gray);
+    font-size: var(--font-size-md);
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px 25px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.backBtn:hover {
+    background: var(--color-blue-gray);
+    color: white;
+}
+
+.backBtn::before {
+    font-size: var(--font-size-lg);
+    transition: transform 0.3s ease;
+}
+
+.backBtn:hover::before {
+    transform: translateX(-3px);
+}
+
+.selectedSkills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--color-border-light);
+}
+
+.skillTag {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 8px;
+    padding: 8px 16px;
+
+    border-radius: 30px;
+    border: 2px solid var(--color-primary-blue);
+    box-shadow: 0 5px 10px -2px rgba(75, 79, 216, 0.1);
+
+    font-size: var(--font-size-sm);
+    color: var(--color-primary-blue);
+    font-weight: 500;
+
+    transition: all 0.3s ease;
+    animation: fadeIn 0.3s ease;
+}
+
+.skillTag:hover {
+    transform: translateY(-5px);
+}
+
+.removeSkill {
+    background: none;
+    border: none;
+    color: var(--color-blue-gray);
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.removeSkill:hover {
+    background: #ff4444;
+    color: white;
+    transform: scale(1.1);
+}
+
+.suggestionsDropdown {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    border: 1px solid var(--color-border-light);
+    border-radius: 16px;
+    margin-top: 5px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.suggestionsDropdown::-webkit-scrollbar {
+    width: 8px;
+}
+
+.suggestionsDropdown::-webkit-scrollbar-track {
+    background: #FFFFFF;
+    border-radius: 4px;
+}
+
+.suggestionsDropdown::-webkit-scrollbar-thumb {
+    background: var(--color-border-light);
+    border-radius: 4px;
+}
+
+.suggestionsDropdown::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-blue);
+}
+
+.suggestionItem {
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: var(--font-size-sm);
+    color: var(--color-dark);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.suggestionItem:last-child {
+    border-bottom: none;
+}
+
+.suggestionItem:hover {
+    background: linear-gradient(135deg, var(--color-primary-blue), var(--color-primary-green));
+    color: white;
+    padding-left: 25px;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.textInput,
+.skillsInput {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid var(--color-border-light);
+    border-radius: 16px;
+    font-size: var(--font-size-md);
+    transition: all 0.3s ease;
+    background: #FFFFFF;
+    color: var(--color-dark);
+}
+
+.textInput:focus,
+.skillsInput:focus {
+    outline: none;
+    border-color: var(--color-primary-blue);
+    box-shadow: 0 0 0 4px rgba(75, 79, 216, 0.1);
+}
+
+.textInput::placeholder,
+.skillsInput::placeholder {
+    color: var(--color-blue-gray);
+    opacity: 0.6;
+}
+
+.popularSkills {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.popularLabel {
+    font-size: var(--font-size-xs);
+    color: var(--color-blue-gray);
+    font-weight: 500;
+}
+
+.popularSkill {
+    padding: 6px 14px;
+    background: none;
+    border: 2px dashed var(--color-border-light);
+    border-radius: 30px;
+    font-size: var(--font-size-xs);
+    color: var(--color-blue-gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.popularSkill:hover {
+    border-color: var(--color-primary-green);
+    color: var(--color-primary-green);
+    background: rgba(0, 194, 110, 0.05);
+    transform: translateY(-2px);
+}
+
+.selectedValue {
+    margin-top: 15px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(75, 79, 216, 0.1), rgba(0, 194, 110, 0.1));
+    border-radius: 12px;
+    font-size: var(--font-size-sm);
+    color: var(--color-primary-blue);
+    border: 1px solid rgba(75, 79, 216, 0.2);
+}
+
+.selectedValue strong {
+    color: var(--color-primary-blue);
+    font-weight: 600;
+    margin-right: 5px;
+}
