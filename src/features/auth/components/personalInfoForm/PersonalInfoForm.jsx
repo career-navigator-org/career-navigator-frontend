@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { educationOptions, citiesDatabase } from '../../../../shared/ui/constants'
 import styles from './PersonalInfoForm.module.css'
 
-export const PersonalInfoForm = ({ formData, updateFormData, onNext }) => {
+export const PersonalInfoForm = ({ formData, updateFormData, onChangeStep }) => {
   const [cityInput, setCityInput] = useState('')
   const [showSuggestions, setShowSuggestions] = useState(false)
 
@@ -128,7 +128,7 @@ export const PersonalInfoForm = ({ formData, updateFormData, onNext }) => {
 
       <div className={styles.questionsFooter}>
         <button
-          onClick={onNext}
+          onClick={() => onChangeStep('')}
           disabled={
             !formData.fullName ||
             !formData.birthDate ||

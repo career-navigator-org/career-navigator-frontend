@@ -1,22 +1,12 @@
-<<<<<<< HEAD
-import { Graph } from "./components/Graph";
-
-=======
 import { useState, useCallback } from "react";
 import { Graph } from "./components/graph/Graph";
 import Card from "./components/card/Card";
 import professions from "./const/professions";
->>>>>>> 7151d94 (чё-то сделал)
+
 import styles from "./GraphPage.module.css";
 
 
 export default function GraphPage() {
-<<<<<<< HEAD
-
-    return (
-        <div className={styles.page}>
-            <Graph />
-=======
     const [isShow, setIsShow] = useState(false);
     const [selectedNode, setSelectedNode] = useState(null);
 
@@ -56,7 +46,6 @@ export default function GraphPage() {
                 setIsShow={handleShowCard}
                 isShow={isShow}
             />
->>>>>>> 7151d94 (чё-то сделал)
         </div>
     );
 }

@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-
-export default function AuthPage() {
-    return (
-        <div>
-
-        </div>
-    )
-};
-=======
 import { Welcome } from './components/welcome/Welcome';
 import { PersonalInfoForm } from './components/personalInfoForm/PersonalInfoForm';
 import { CareerForm } from './components/careerForm/CareerForm';
@@ -39,6 +29,7 @@ const AuthPage = ({ onComplete }) => {
     handleSubmit,
     nextStep,
     prevStep,
+    setStep,
     startOnboarding
   } = useOnboarding();
 
@@ -60,7 +51,7 @@ const AuthPage = ({ onComplete }) => {
     updateFormData('selectedSkills', []);
     setCareerInput('');
 
-    navigate('/skills');
+    navigate('/graph');
   };
 
   if (step === 'welcome') {
@@ -68,7 +59,7 @@ const AuthPage = ({ onComplete }) => {
       <div className="app-container">
         <Welcome
           onStart={() => {
-            startOnboarding();
+            setStep('personal-info');
             navigate("/auth?onboarding=true");
           }}
         />
@@ -83,7 +74,7 @@ const AuthPage = ({ onComplete }) => {
         <PersonalInfoForm
           formData={formData}
           updateFormData={updateFormData}
-          onNext={nextStep}
+          onChangeStep={setStep}
         />
       </div>
     );
@@ -97,7 +88,7 @@ const AuthPage = ({ onComplete }) => {
           updateFormData={updateFormData}
           onSubmit={handleComplete}
           loading={loading}
-          onBack={prevStep}
+          onChangeStep={setStep}
         />
       </div>
     );
@@ -111,7 +102,7 @@ const AuthPage = ({ onComplete }) => {
         updateFormData={updateFormData}
         onSubmit={handleComplete}
         loading={loading}
-        onBack={prevStep}
+        //onBack={prevStep}
         skillInput={skillInput}
         setSkillInput={setSkillInput}
         careerInput={careerInput}
@@ -123,11 +114,10 @@ const AuthPage = ({ onComplete }) => {
         handleSkillKeyDown={handleSkillKeyDown}
         handleCareerSelect={handleCareerSelect}
         handleCareerKeyDown={handleCareerKeyDown}
-        nextStep={nextStep}
+        onChangeStep={setStep}
       />
     </div>
   );
 };
 
 export default AuthPage;
->>>>>>> 7151d94 (чё-то сделал)

@@ -5,16 +5,16 @@ export const AccountForm = ({
   formData,
   updateFormData,
   onSubmit,
-  onBack,
+  onChangeStep,
   loading
 }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false); // управляет обоими полями
 
-  const isPasswordValid = formData.password.length >= 6;
-  const isConfirmValid = confirmPassword === formData.password;
+  const isPasswordValid = formData?.password?.length >= 6;
+  const isConfirmValid = confirmPassword === formData?.password;
   const isValid =
-    formData.email &&
+    formData?.email &&
     isPasswordValid &&
     confirmPassword &&
     isConfirmValid;
@@ -26,7 +26,7 @@ export const AccountForm = ({
       <div className={styles.questionsHeader}>
         <span className={styles.questionsStep}>Шаг 3 из 3</span>
         <h2>Создание аккаунта</h2>
-        <button onClick={onBack} className={styles.backBtn}>Назад</button>
+        <button onClick={() => onChangeStep('')} className={styles.backBtn}>Назад</button>
       </div>
 
       {/* Email */}
@@ -83,9 +83,9 @@ export const AccountForm = ({
 
         {/* Сообщения об ошибках */}
         <div className={styles.passwordErrors}>
-          {!isPasswordValid && formData.password.length > 0 && (
+          {/* {!isPasswordValid && formData?.password.length > 0 && (
             <div>Пароль должен быть не менее 6 символов</div>
-          )}
+          )} */}
           {!isConfirmValid && confirmPassword.length > 0 && (
             <div>Пароли не совпадают</div>
           )}
