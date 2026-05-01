@@ -1,75 +1,95 @@
-import { Welcome } from './components/welcome/Welcome';
-import { PersonalInfoForm } from './components/personalInfoForm/PersonalInfoForm';
-import { CareerForm } from './components/careerForm/CareerForm';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { Welcome } from "./components/welcome/Welcome";
+import { PersonalInfoForm } from "./components/personalInfoForm/PersonalInfoForm";
+import { CareerForm } from "./components/careerForm/CareerForm";
 import { AccountForm } from "./components/accountForm/AccountForm";
+import { useOnboarding } from "./hooks/useOnboarding";
+import { saveOnboardingProfile } from "./api/authApi";
+import { useAuthContext } from "../../app/providers/AuthProvider";
 
-import { useNavigate } from 'react-router-dom';
-import { useOnboarding } from './hooks/useOnboarding';
-// import { ThemeToggle } from '../../app/components/ThemeToggle/ThemeToggle'; 
-// import styles from './AuthPage.module.css'; 
+const splitFullName = (fullName) => {
+  const parts = fullName.trim().split(/\s+/).filter(Boolean);
+  return {
+    firstName: parts[0] || "User",
+    lastName: parts.slice(1).join(" ") || "User"
+  };
+};
 
-const AuthPage = ({ onComplete }) => {
+const AuthPage = () => {
   const {
     step,
     formData,
-    skillInput, setSkillInput,
-    cityInput, setCityInput,
-    careerInput, setCareerInput,
     loading,
-    getCareerSuggestions,
-    getCitySuggestions,
-    getSkillSuggestions,
-    addSkill,
-    removeSkill,
-    handleSkillKeyDown,
-    handleCareerSelect,
-    handleCareerKeyDown,
-    handleCitySelect,
+    setLoading,
     updateFormData,
-    handleSubmit,
     nextStep,
     prevStep,
     startOnboarding
   } = useOnboarding();
-
+  const { register, login, refreshAuth, setProfile } = useAuthContext();
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleComplete = (e) => {
+  const handleComplete = async (e) => {
     e.preventDefault();
 
     if (!formData.career || formData.selectedSkills.length === 0) {
-      alert('Заполните все поля');
+      setError("Заполните все поля анкеты.");
       return;
     }
 
-    if (onComplete) {
-      onComplete(formData);
+    const { firstName, lastName } = splitFullName(formData.fullName);
+
+    try {
+      setError("");
+      setLoading(true);
+
+      await register({
+        firstName,
+        lastName,
+        email: formData.email,
+        password: formData.password
+      });
+
+      await login(formData.email, formData.password);
+
+      const savedProfile = await saveOnboardingProfile({
+        fullName: formData.fullName,
+        birthDate: formData.birthDate,
+        educationStatus: formData.educationStatus,
+        city: formData.city,
+        career: formData.career,
+        selectedSkills: formData.selectedSkills
+      });
+
+      setProfile(savedProfile);
+      await refreshAuth();
+      navigate("/profile");
+    } catch (submitError) {
+      setError(submitError.message || "Не удалось создать аккаунт.");
+    } finally {
+      setLoading(false);
     }
-
-    updateFormData('career', '');
-    updateFormData('selectedSkills', []);
-    setCareerInput('');
-
-    navigate('/skills');
   };
 
-  if (step === 'welcome') {
+  if (step === "welcome") {
     return (
       <div className="app-container">
         <Welcome
           onStart={() => {
             startOnboarding();
-            navigate("/auth?onboarding=true");
+            navigate("/auth");
           }}
         />
       </div>
     );
   }
 
-  if (step === 'personal-info') {
+  if (step === "personal-info") {
     return (
       <div className="app-container">
-        {/* <ThemeToggle /> */}
         <PersonalInfoForm
           formData={formData}
           updateFormData={updateFormData}
@@ -88,6 +108,7 @@ const AuthPage = ({ onComplete }) => {
           onSubmit={handleComplete}
           loading={loading}
           onBack={prevStep}
+          error={error}
         />
       </div>
     );
@@ -95,24 +116,11 @@ const AuthPage = ({ onComplete }) => {
 
   return (
     <div className="app-container">
-      {/* <ThemeToggle /> */}
       <CareerForm
         formData={formData}
         updateFormData={updateFormData}
-        onSubmit={handleComplete}
         loading={loading}
         onBack={prevStep}
-        skillInput={skillInput}
-        setSkillInput={setSkillInput}
-        careerInput={careerInput}
-        setCareerInput={setCareerInput}
-        getCareerSuggestions={getCareerSuggestions}
-        getSkillSuggestions={getSkillSuggestions}
-        addSkill={addSkill}
-        removeSkill={removeSkill}
-        handleSkillKeyDown={handleSkillKeyDown}
-        handleCareerSelect={handleCareerSelect}
-        handleCareerKeyDown={handleCareerKeyDown}
         nextStep={nextStep}
       />
     </div>

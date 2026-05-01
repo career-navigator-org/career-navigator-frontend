@@ -1,33 +1,44 @@
 import styles from "./About.module.css";
+
 import { BoxContainer } from "../../../../shared/ui/BoxContainer/BoxContainer";
 
-export const About = () => {
+export const About = ({ profile }) => {
     return (
         <BoxContainer>
             <p className={styles.aboutTitle}>Обо мне</p>
             <div className={styles.aboutContent}>
                 <div className={styles.aboutItems}>
                     <div className={styles.aboutItem}>
-                        <p className={styles.itemLabel}>Место учёбы</p>
-                        <p className={styles.itemValue}>Алабуга Политех</p>
+                        <p className={styles.itemLabel}>Город</p>
+                        <p className={styles.itemValue}>{profile?.city || "Не указан"}</p>
                     </div>
                     <div className={styles.aboutItem}>
-                        <p className={styles.itemLabel}>Место работы</p>
-                        <p className={styles.itemValue}>Алабуга Политех</p>
+                        <p className={styles.itemLabel}>Дата рождения</p>
+                        <p className={styles.itemValue}>{profile?.birthDate || "Не указана"}</p>
                     </div>
                 </div>
                 <div className={styles.textareaBlock}>
                     <p className={styles.itemLabel}>Образование</p>
                     <textarea
+                        readOnly
                         className={styles.textarea}
-                        placeholder="Опишите свое образование, полученные сертификаты, пройденные курсы..."
+                        value={profile?.educationStatus || "Не указано"}
                     />
                 </div>
                 <div className={styles.textareaBlock}>
-                    <p className={styles.itemLabel}>Карьера</p>
+                    <p className={styles.itemLabel}>Карьерная цель</p>
                     <textarea
+                        readOnly
                         className={styles.textarea}
-                        placeholder="Опишите свой карьерный путь, опыт работы, достижения..."
+                        value={profile?.career || "Не указана"}
+                    />
+                </div>
+                <div className={styles.textareaBlock}>
+                    <p className={styles.itemLabel}>Навыки</p>
+                    <textarea
+                        readOnly
+                        className={styles.textarea}
+                        value={profile?.selectedSkills?.join(", ") || "Не указаны"}
                     />
                 </div>
             </div>

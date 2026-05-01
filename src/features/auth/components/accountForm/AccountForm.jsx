@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import styles from "./AccountForm.module.css";
 
 export const AccountForm = ({
@@ -6,12 +7,13 @@ export const AccountForm = ({
   updateFormData,
   onSubmit,
   onBack,
-  loading
+  loading,
+  error
 }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // управляет обоими полями
+  const [showPassword, setShowPassword] = useState(false);
 
-  const isPasswordValid = formData.password.length >= 6;
+  const isPasswordValid = formData.password.length >= 8;
   const isConfirmValid = confirmPassword === formData.password;
   const isValid =
     formData.email &&
@@ -29,7 +31,6 @@ export const AccountForm = ({
         <button onClick={onBack} className={styles.backBtn}>Назад</button>
       </div>
 
-      {/* Email */}
       <div className={styles.questionBlock}>
         <label className={styles.questionLabel}>Email</label>
         <input
@@ -41,17 +42,15 @@ export const AccountForm = ({
         />
       </div>
 
-      {/* Пароль + Подтверждение в одном блоке */}
       <div className={styles.questionBlock}>
         <label className={styles.questionLabel}>Пароль и подтверждение</label>
 
-        {/* Пароль */}
         <div className={styles.passwordWrapper}>
           <input
             type={showPassword ? "text" : "password"}
             value={formData.password}
             onChange={(e) => updateFormData("password", e.target.value)}
-            placeholder="Пароль (мин. 6 символов)"
+            placeholder="Пароль (мин. 8 символов)"
             className={styles.textInput}
           />
           <button
@@ -63,7 +62,6 @@ export const AccountForm = ({
           </button>
         </div>
 
-        {/* Подтверждение */}
         <div className={styles.passwordWrapper} style={{ marginTop: "10px" }}>
           <input
             type={showPassword ? "text" : "password"}
@@ -81,18 +79,17 @@ export const AccountForm = ({
           </button>
         </div>
 
-        {/* Сообщения об ошибках */}
         <div className={styles.passwordErrors}>
           {!isPasswordValid && formData.password.length > 0 && (
-            <div>Пароль должен быть не менее 6 символов</div>
+            <div>Пароль должен быть не менее 8 символов</div>
           )}
           {!isConfirmValid && confirmPassword.length > 0 && (
             <div>Пароли не совпадают</div>
           )}
+          {error && <div>{error}</div>}
         </div>
       </div>
 
-      {/* Кнопка далее */}
       <div className={styles.questionsFooter}>
         <button
           onClick={onSubmit}
