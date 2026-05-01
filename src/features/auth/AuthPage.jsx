@@ -35,23 +35,69 @@ const AuthPage = ({ onComplete }) => {
 
   const navigate = useNavigate();
 
-  const handleComplete = (e) => {
+  const handleComplete = async (e) => {
     e.preventDefault();
 
+    // Валидация
     if (!formData.career || formData.selectedSkills.length === 0) {
       alert('Заполните все поля');
       return;
     }
 
-    if (onComplete) {
-      onComplete(formData);
+    try {
+
+      const checkServerHealth = async () => {
+        try {
+          const response = await fetch('/api/ping');
+
+          if (!response.ok) return false;
+
+          const data = await response.text(); // pong обычно приходит строкой
+          return data.trim().toLowerCase() === 'pong';
+        } catch (error) {
+          console.error("Сервер недоступен (Health Check failed)");
+          return false;
+        }
+      };
+      // Теперь запрос идет на /auth, и прокси перенаправит его сам
+      const response = await fetch('/auth/sign-up', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstName: "Ivan",
+          lastName: "Ivanov",
+          email: "geo.proleev@gmail.com", // Берем из формы
+          password: "12345678"
+        })
+      });
+
+      console.log(response);
+
+
+      if (!response.ok) {
+        // Если сервер вернул ошибку, пытаемся прочитать её текст
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Ошибка: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log("Успешная регистрация:", result);
+
+      // Очистка формы и переход
+      if (onComplete) onComplete(formData);
+
+      updateFormData('career', '');
+      updateFormData('selectedSkills', []);
+      setCareerInput('');
+
+      navigate('/graph');
+
+    } catch (error) {
+      console.error("Ошибка при запросе:", error);
+      alert(`Не удалось отправить данные: ${error.message}`);
     }
-
-    updateFormData('career', '');
-    updateFormData('selectedSkills', []);
-    setCareerInput('');
-
-    navigate('/graph');
   };
 
   if (step === 'welcome') {

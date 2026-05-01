@@ -1,6 +1,6 @@
 import { useMemo, useState, useRef, useEffect } from "react";
 import ForceGraph2D from "react-force-graph-2d";
-import { graphData } from "../../const/graphData";
+import { useUserGraph } from "../../const/graphData";
 
 
 const LEVEL_COLORS = {
@@ -30,20 +30,26 @@ function darken(color, percent) {
 export const Graph = ({ setIsShow, isShow }) => {
     const fgRef = useRef();
     const [hoverNode, setHoverNode] = useState(null);
-    const data = useMemo(() => graphData, []);
+    const { graph, loading, error } = useUserGraph(1);
 
     useEffect(() => {
+
         if (fgRef.current) {
+
             setTimeout(() => {
+
                 fgRef.current.zoom(1.8, 800);
+
             }, 100);
+
         }
+
     }, []);
 
     return (
         <ForceGraph2D
             ref={fgRef}
-            graphData={data}
+            graphData={graph}
             linkDirectionalParticles={0}
             onNodeHover={(node) => {
                 setHoverNode(node);
@@ -109,7 +115,8 @@ export const Graph = ({ setIsShow, isShow }) => {
                 ctx.fillStyle = isActive ? "#000000" : "#666666";
                 ctx.textAlign = "center";
                 ctx.textBaseline = "top";
-                ctx.fillText(node.id, node.x, node.y + size + 6);
+                const label = node.label;
+                ctx.fillText(label, node.x, node.y + size + 5);
             }}
             nodePointerAreaPaint={(node, color, ctx) => {
                 ctx.fillStyle = color;
