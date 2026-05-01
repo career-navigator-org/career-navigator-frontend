@@ -37,41 +37,27 @@ export const AccountForm = ({
     }
 
     try {
-      const checkServerHealth = async () => {
-        try {
-          const response = await fetch('http://155.212.217.53:8081/auth/ping');
+      const response = await fetch('http://155.212.217.53:8081/auth/sign-in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstName: "Ivan",
+          lastName: "Ivanov",
+          email: "geo.proleev@gmail.com",
+          password: "12345678"
+        })
+      });
 
-          if (!response.ok) return false;
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || `Ошибка: ${response.status}`);
+      }
 
-          const data = await response.text();
-          return data.trim().toLowerCase() === 'pong';
-        } catch (error) {
-          console.error("Сервер недоступен (Health Check failed)", error);
-          return false;
-        }
-      };
-
-      // const response = await fetch('/auth/sign-up', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     firstName: "Ivan",
-      //     lastName: "Ivanov",
-      //     email: "geo.proleev@gmail.com",
-      //     password: "12345678"
-      //   })
-      // });
-
-      // if (!response.ok) {
-      //   const errorData = await response.json().catch(() => ({}));
-      //   throw new Error(errorData.message || `Ошибка: ${response.status}`);
-      // }
-
-      // const result = await response.json();
-      //navigate('/graph')
-      checkServerHealth();
+      const result = await response.json();
+      localStorage.setItem('token', result.token);
+      navigate('/graph')
       console.log("Успешная регистрация:", data);
 
       updateFormData('career', '');

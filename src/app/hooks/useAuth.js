@@ -24,31 +24,46 @@ export function useAuth() {
 
     // Логин
     const login = async (email, password) => {
-        const res = await fetch("/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({ email, password }),
+        const res = await fetch('http://155.212.217.53:8081/auth/sign-in', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
         });
 
         if (!res.ok) throw new Error("Login failed");
 
         const data = await res.json();
-        setUser(data.user);
+        //setUser(data.user);
     };
 
-    const register = async (email, password) => {
-        const res = await fetch("/api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({ email, password }),
+    const register = async (firstName, lastName, email, password) => {
+        const response = await fetch('http://155.212.217.53:8081/auth/sign-up', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password
+            })
         });
 
-        if (!res.ok) throw new Error("Login failed");
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || `Ошибка: ${response.status}`);
+        }
 
-        const data = await res.json();
-        setUser(data.user);
+        const result = await response.json();
+        localStorage.setItem('token', result.token);
+        console.log("Успешная регистрация");
+        //setUser(result);
     };
 
     // Выход
