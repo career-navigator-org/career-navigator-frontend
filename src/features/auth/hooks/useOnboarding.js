@@ -6,7 +6,6 @@ import {
 } from '../../../shared/ui/constants';
 
 export const useOnboarding = () => {
-  const [step, setStep] = useState('welcome');
   const [formData, setFormData] = useState({
     fullName: '',
     birthDate: '',
@@ -106,16 +105,14 @@ export const useOnboarding = () => {
     return 'success';
   };
 
-  // const nextStep = () => setStep('main-questions');
-  // const prevStep = () => setStep('personal-info');
-  // const startOnboarding = () => setStep('personal-info');
-
   return {
-    step,
     formData,
-    skillInput, setSkillInput,
-    cityInput, setCityInput,
-    careerInput, setCareerInput,
+    skillInput,
+    setSkillInput,
+    cityInput,
+    setCityInput,
+    careerInput,
+    setCareerInput,
     loading,
     getCareerSuggestions,
     getCitySuggestions,
@@ -127,10 +124,6 @@ export const useOnboarding = () => {
     handleCareerKeyDown,
     handleCitySelect,
     updateFormData,
-    handleSubmit,
-    // nextStep,
-    //prevStep,
-    setStep
-    //startOnboarding
+    handleSubmit
   };
 };

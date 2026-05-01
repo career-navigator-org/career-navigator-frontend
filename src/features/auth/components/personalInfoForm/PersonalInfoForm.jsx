@@ -38,7 +38,7 @@ export const PersonalInfoForm = ({ formData, updateFormData, onChangeStep }) => 
   })()
 
   return (
-    <div className={styles.questionsMinimal}>
+    <div>
       <div className={styles.questionsHeader}>
         <span className={styles.questionsStep}>Шаг 1 из 3</span>
         <h2>Основная информация</h2>
@@ -128,7 +128,7 @@ export const PersonalInfoForm = ({ formData, updateFormData, onChangeStep }) => 
 
       <div className={styles.questionsFooter}>
         <button
-          onClick={() => onChangeStep('')}
+          onClick={onChangeStep}
           disabled={
             !formData.fullName ||
             !formData.birthDate ||

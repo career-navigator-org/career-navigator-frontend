@@ -1,6 +1,7 @@
 import { useMemo, useState, useRef, useEffect } from "react";
 import ForceGraph2D from "react-force-graph-2d";
-import { useUserGraph } from "../../const/graphData";
+
+import { useUserGraph } from "../../hooks/useUserGraph";
 
 
 const LEVEL_COLORS = {
@@ -30,20 +31,15 @@ function darken(color, percent) {
 export const Graph = ({ setIsShow, isShow }) => {
     const fgRef = useRef();
     const [hoverNode, setHoverNode] = useState(null);
+
     const { graph, loading, error } = useUserGraph(1);
 
     useEffect(() => {
-
         if (fgRef.current) {
-
             setTimeout(() => {
-
                 fgRef.current.zoom(1.8, 800);
-
             }, 100);
-
         }
-
     }, []);
 
     return (
@@ -78,7 +74,12 @@ export const Graph = ({ setIsShow, isShow }) => {
                 const isActive = node === hoverNode;
                 const size = isActive ? baseSize * 1.2 : baseSize;
 
-                const levelColor = LEVEL_COLORS[node.level] || LEVEL_COLORS[2];
+                const level = node.type === "profession" ? 3
+                    : node.type === "user" ? node.level
+                        : node.type === "skill" ? node.level
+                            : 2;
+
+                const levelColor = LEVEL_COLORS[level];
                 const mainColor = levelColor.node;
 
                 ctx.beginPath();

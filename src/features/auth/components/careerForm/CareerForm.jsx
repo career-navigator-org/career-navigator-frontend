@@ -5,9 +5,9 @@ import styles from './CareerForm.module.css'
 export const CareerForm = ({
   formData,
   updateFormData,
-  onSubmit,
   loading,
-  onChangeStep
+  onChangeStep,
+  onBack
 }) => {
   const [skillInput, setSkillInput] = useState('')
   const [careerInput, setCareerInput] = useState('')
@@ -79,11 +79,11 @@ export const CareerForm = ({
   const skillSuggestions = getSkillSuggestions()
 
   return (
-    <div className={styles.questionsMinimal}>
+    <div>
       <div className={styles.questionsHeader}>
         <span className={styles.questionsStep}>Шаг 2 из 3</span>
         <h2>Карьера и навыки</h2>
-        <button onClick={() => onChangeStep('personal-info')} className={styles.backBtn}>Назад</button>
+        <button onClick={onBack} className={styles.backBtn}>Назад</button>
       </div>
 
       <div className={styles.questionBlock}>
@@ -186,7 +186,7 @@ export const CareerForm = ({
 
       <div className={styles.questionsFooter}>
         <button
-          onClick={() => onChangeStep('account')}
+          onClick={onChangeStep}
           disabled={!formData.career || formData.selectedSkills.length === 0 || loading}
           className={styles.submitQuestionsBtn}
         >

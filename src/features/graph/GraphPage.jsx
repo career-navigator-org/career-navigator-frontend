@@ -13,9 +13,10 @@ export default function GraphPage() {
     const handleShowCard = useCallback((show, node = null) => {
         setIsShow(show);
 
-        if (node && node.level === 3) {
+        if (node && node.type === "profession") {
+            console.log(professions);
             const profession = professions.find(p =>
-                p.title.toLowerCase().includes(node.id.toLowerCase())
+                p.title.toLowerCase().includes(node.id)
             );
             setSelectedNode(profession || professions[0]);
         } else {

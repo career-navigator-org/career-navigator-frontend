@@ -1,12 +1,3 @@
-.questionsMinimal {
-    min-height: 100vh;
-    padding: 60px 20px;
-    max-width: 700px;
-    margin: 0 auto;
-    width: 100%;
-    transition: background-color 0.3s ease;
-}
-
 .questionsHeader {
     text-align: center;
     margin-bottom: 40px;
@@ -38,6 +29,7 @@
     background: #FFFFFF;
     border-radius: 24px;
     padding: 30px;
+    min-width: 600px;
     margin-bottom: 20px;
     box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--color-border-light);
@@ -67,27 +59,28 @@
 .submitQuestionsBtn {
     padding: 16px 50px;
     background: white;
-
     border: 2px solid var(--color-border-light);
     border-radius: 30px;
-
     font-size: var(--font-size-md);
     font-weight: 600;
     color: var(--color-dark);
-
     cursor: pointer;
     transition: all 0.3s ease;
     width: 100%;
-
     position: relative;
     overflow: hidden;
 }
 
-.submitQuestionsBtn:hover {
+.submitQuestionsBtn:hover:not(:disabled) {
     transform: translateY(-5px);
-    border: 2px solid var(--color-primary-blue);
+    border-color: var(--color-primary-blue);
     color: var(--color-primary-blue);
-    box-shadow: 0 5px 10px -10px var(--shadow-color, rgba(0, 0, 0, 0.15));
+    box-shadow: 0 5px 10px -10px rgba(0, 0, 0, 0.15);
+}
+
+.submitQuestionsBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .backBtn {
@@ -135,44 +128,28 @@
     cursor: pointer;
     gap: 8px;
     padding: 8px 16px;
-
     border-radius: 30px;
     border: 2px solid var(--color-primary-blue);
     box-shadow: 0 5px 10px -2px rgba(75, 79, 216, 0.1);
-
     font-size: var(--font-size-sm);
     color: var(--color-primary-blue);
     font-weight: 500;
-
     transition: all 0.3s ease;
     animation: fadeIn 0.3s ease;
 }
 
 .skillTag:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
 }
 
 .removeSkill {
-    background: none;
-    border: none;
-    color: var(--color-blue-gray);
-    font-size: var(--font-size-xl);
-    cursor: pointer;
-    padding: 0 4px;
-    line-height: 1;
-    transition: all 0.2s ease;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
 }
 
-.removeSkill:hover {
-    background: #ff4444;
-    color: white;
-    transform: scale(1.1);
+.inputWrapper {
+    position: relative;
+    width: 100%;
+    z-index: 1;
 }
 
 .suggestionsDropdown {
@@ -183,20 +160,14 @@
     background: #FFFFFF;
     border: 1px solid var(--color-border-light);
     border-radius: 16px;
-    margin-top: 5px;
     box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
-    z-index: 100;
+    z-index: 999;
     max-height: 250px;
     overflow-y: auto;
 }
 
 .suggestionsDropdown::-webkit-scrollbar {
     width: 8px;
-}
-
-.suggestionsDropdown::-webkit-scrollbar-track {
-    background: #FFFFFF;
-    border-radius: 4px;
 }
 
 .suggestionsDropdown::-webkit-scrollbar-thumb {
@@ -225,11 +196,6 @@
     background: linear-gradient(135deg, var(--color-primary-blue), var(--color-primary-green));
     color: white;
     padding-left: 25px;
-}
-
-.inputWrapper {
-    position: relative;
-    width: 100%;
 }
 
 .textInput,
@@ -301,7 +267,18 @@
 }
 
 .selectedValue strong {
-    color: var(--color-primary-blue);
     font-weight: 600;
     margin-right: 5px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

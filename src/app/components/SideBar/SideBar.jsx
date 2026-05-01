@@ -27,7 +27,7 @@ export const SideBar = () => {
             </nav>
             <div className={styles.sideBarHeader}>
                 <p className={styles.userName}>Yuma</p>
-                <p className={styles.userEmail}>romanuminov07165@gmail.com</p>
+                <p className={styles.userEmail}>ecppr@gmail.com</p>
             </div>
         </aside>
     );

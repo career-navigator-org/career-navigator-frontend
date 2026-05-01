@@ -1,15 +1,22 @@
 import { useState } from "react";
+import { data, useNavigate } from "react-router-dom";
+
 import styles from "./AccountForm.module.css";
+
+import { useOnboarding } from "../../hooks/useOnboarding";
+
 
 export const AccountForm = ({
   formData,
   updateFormData,
-  onSubmit,
-  onChangeStep,
-  loading
+  loading,
+  onBack
 }) => {
+  const { setCareerInput } = useOnboarding();
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // управляет обоими полями
+  const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   const isPasswordValid = formData?.password?.length >= 6;
   const isConfirmValid = confirmPassword === formData?.password;
@@ -21,12 +28,68 @@ export const AccountForm = ({
 
   const toggleShowPassword = () => setShowPassword(!showPassword);
 
+  const handleAuth = async (e) => {
+    e.preventDefault();
+
+    if (!formData.career || formData.selectedSkills.length === 0) {
+      alert('Заполните все поля');
+      return;
+    }
+
+    try {
+      const checkServerHealth = async () => {
+        try {
+          const response = await fetch('http://155.212.217.53:8081/auth/ping');
+
+          if (!response.ok) return false;
+
+          const data = await response.text();
+          return data.trim().toLowerCase() === 'pong';
+        } catch (error) {
+          console.error("Сервер недоступен (Health Check failed)", error);
+          return false;
+        }
+      };
+
+      // const response = await fetch('/auth/sign-up', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     firstName: "Ivan",
+      //     lastName: "Ivanov",
+      //     email: "geo.proleev@gmail.com",
+      //     password: "12345678"
+      //   })
+      // });
+
+      // if (!response.ok) {
+      //   const errorData = await response.json().catch(() => ({}));
+      //   throw new Error(errorData.message || `Ошибка: ${response.status}`);
+      // }
+
+      // const result = await response.json();
+      //navigate('/graph')
+      checkServerHealth();
+      console.log("Успешная регистрация:", data);
+
+      updateFormData('career', '');
+      updateFormData('selectedSkills', []);
+      setCareerInput('');
+
+    } catch (error) {
+      console.error("Ошибка при запросе:", error);
+      alert(`Не удалось отправить данные: ${error.message}`);
+    }
+  };
+
   return (
-    <div className={styles.questionsMinimal}>
+    <div>
       <div className={styles.questionsHeader}>
         <span className={styles.questionsStep}>Шаг 3 из 3</span>
         <h2>Создание аккаунта</h2>
-        <button onClick={() => onChangeStep('')} className={styles.backBtn}>Назад</button>
+        <button onClick={onBack} className={styles.backBtn}>Назад</button>
       </div>
 
       {/* Email */}
@@ -95,13 +158,13 @@ export const AccountForm = ({
       {/* Кнопка далее */}
       <div className={styles.questionsFooter}>
         <button
-          onClick={onSubmit}
+          onClick={handleAuth}
           disabled={!isValid || loading}
           className={styles.submitQuestionsBtn}
         >
           {loading ? "Создание..." : "Создать аккаунт"}
         </button>
       </div>
-    </div>
+    </div >
   );
 };

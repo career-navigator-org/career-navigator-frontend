@@ -4,7 +4,8 @@ import { PublicRoute } from "./ui/PublicRoute";
 import { PrivateRoute } from "./ui/PrivateRoute";
 
 
-import MainLayout from "../layouts/MainLayout";
+import MainLayout from "../layouts/main/MainLayout";
+import AuthLayout from "../layouts/auth/AuthLayout";
 
 import GraphPage from "../../features/graph/GraphPage";
 import ProfilePage from "../../features/profile/ProfilePage";
@@ -14,11 +15,13 @@ import SettingsPage from "../../features/settings/SettingsPage";
 
 export const AppRouter = () => {
     return <Routes>
-        <Route element={<MainLayout />}>
+        <Route element={<AuthLayout />}>
             {/* Public routes — только для НЕ авторизованных */}
             <Route element={<PublicRoute />}>
                 <Route path="/auth" element={<AuthPage />} />
             </Route>
+        </Route>
+        <Route element={<MainLayout />}>
             {/* Routes for everyone */}
             <Route path="/graph" element={<GraphPage />} />
             <Route path="/" element={<Navigate to="/graph" replace />} />
@@ -27,8 +30,8 @@ export const AppRouter = () => {
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/settings" element={<SettingsPage />} />
             </Route>
-            {/* 404 */}
-            <Route path="*" element={<></>} />
         </Route>
+        {/* 404 */}
+        <Route path="*" element={<></>} />
     </Routes>
 }

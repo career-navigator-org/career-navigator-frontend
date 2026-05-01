@@ -13,7 +13,7 @@ export const Header = () => {
                     <p className={styles.profileName}>Yuma</p>
                     <div className={styles.profileEmail}>
                         <MailIconComponent className={styles.mailIcon} />
-                        <p>romanuminov071@gmail.com</p>
+                        <p>ecppr@gmail.com</p>
                     </div>
                 </div>
             </div>
